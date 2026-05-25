@@ -346,17 +346,27 @@ fun SettingsScreen(
 private fun LanguageSection() {
     val currentTag = remember {
         val locales = AppCompatDelegate.getApplicationLocales()
-        if (locales.isEmpty) "system" else locales[0]?.language ?: "system"
+
+        if (locales.isEmpty) {
+            "system"
+        } else {
+            locales[0]?.toLanguageTag() ?: "system"
+        }
     }
+
     val options = listOf(
         "en"     to stringResource(R.string.settings_lang_english),
         "de"     to stringResource(R.string.settings_lang_deutsch),
         "fr"     to stringResource(R.string.settings_lang_français),
         "es"     to stringResource(R.string.settings_lang_español),
+        "es-ES"  to stringResource(R.string.settings_lang_español_españa),
         "tr"     to stringResource(R.string.settings_lang_turkish),
         "system" to stringResource(R.string.settings_lang_system),
     )
-    val selectedLabel = options.find { it.first == currentTag }?.second ?: options.last().second
+    val selectedLabel =
+        options.find { it.first == currentTag }?.second
+            ?: options.find { currentTag.startsWith("${it.first}-") }?.second
+            ?: options.last().second
     var expanded by remember { mutableStateOf(false) }
 
     SectionHeader(title = stringResource(R.string.settings_language))
