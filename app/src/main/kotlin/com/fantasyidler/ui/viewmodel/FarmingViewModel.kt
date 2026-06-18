@@ -51,6 +51,8 @@ data class FarmingUiState(
     val lastFertilizerKey: String?             = null,
     /** Just-harvested result, shown briefly then cleared. */
     val harvestResult: HarvestResult?          = null,
+    /** True once the magic bean has been planted; used to hide it from the seed picker permanently. */
+    val magicBeanPlanted: Boolean              = false,
 )
 
 data class HarvestResult(
@@ -102,6 +104,7 @@ class FarmingViewModel @Inject constructor(
 
         val availableCrops = gameData.crops.values
             .filter { it.levelRequired <= farmingLevel }
+            .filter { it.id != "magic_bean" || (!flags.magicBeanPlanted && (inv["magic_bean"] ?: 0) > 0) }
             .sortedBy { it.levelRequired }
 
         extra.copy(
@@ -115,6 +118,7 @@ class FarmingViewModel @Inject constructor(
             allCrops         = gameData.crops,
             fertilizer       = flags.farmingFertilizer,
             lastFertilizerKey = flags.lastFertilizerKey,
+            magicBeanPlanted = flags.magicBeanPlanted,
             now              = now,
         )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), FarmingUiState())
@@ -127,7 +131,7 @@ class FarmingViewModel @Inject constructor(
     fun harvestAndPlantAll() {
         viewModelScope.launch {
             val now = System.currentTimeMillis()
-            val finishedPatches = uiState.value.patches.filter { it.remainingMs(gameData.crops, now) <= 0 }
+            val finishedPatches = uiState.value.patches.filter { it.cropType != "magic_bean" && it.remainingMs(gameData.crops, now) <= 0 }
 
             if (finishedPatches.isNotEmpty()) {
                 val playerBefore = playerRepo.getOrCreatePlayer()
@@ -167,20 +171,26 @@ class FarmingViewModel @Inject constructor(
             if (patchNumber == -1) {
                 delay(300)
                 val emptyPatches = farmingRepo.getEmptyPatches(uiState.value.patchCount)
-                var plantedCount = 0
 
-                for (patchNum in emptyPatches) {
-                    if (farmingRepo.plantCrop(patchNum, crop, ashKey)) plantedCount++ else break
-                }
-
-                val msg = if (plantedCount == 0) {
-                    if (emptyPatches.isEmpty()) context.getString(R.string.farming_no_empty_patches)
-                    else context.getString(R.string.farming_no_seeds_inventory, seedName)
+                if (crop.id == "magic_bean") {
+                    val planted = emptyPatches.firstOrNull()?.let { farmingRepo.plantCrop(it, crop, ashKey) } ?: false
+                    val msg = if (planted) context.getString(R.string.farming_magic_bean_one_plot)
+                              else context.getString(R.string.farming_no_seeds_inventory, seedName)
+                    _extra.update { it.copy(snackbarMessage = msg) }
                 } else {
-                    val base = context.getString(R.string.farming_planted, plantedCount, seedName)
-                    if (plantedCount < emptyPatches.size) "$base - ${context.getString(R.string.farming_no_seeds_inventory, seedName)}" else base
+                    var plantedCount = 0
+                    for (patchNum in emptyPatches) {
+                        if (farmingRepo.plantCrop(patchNum, crop, ashKey)) plantedCount++ else break
+                    }
+                    val msg = if (plantedCount == 0) {
+                        if (emptyPatches.isEmpty()) context.getString(R.string.farming_no_empty_patches)
+                        else context.getString(R.string.farming_no_seeds_inventory, seedName)
+                    } else {
+                        val base = context.getString(R.string.farming_planted, plantedCount, seedName)
+                        if (plantedCount < emptyPatches.size) "$base - ${context.getString(R.string.farming_no_seeds_inventory, seedName)}" else base
+                    }
+                    _extra.update { it.copy(snackbarMessage = msg) }
                 }
-                _extra.update { it.copy(snackbarMessage = msg) }
             } else {
                 if (!farmingRepo.plantCrop(patchNumber, crop, ashKey)) {
                     _extra.update { it.copy(snackbarMessage = context.getString(R.string.farming_no_seeds_inventory, seedName)) }
@@ -189,9 +199,17 @@ class FarmingViewModel @Inject constructor(
         }
     }
 
+    fun climbBeanstalk(patchNumber: Int) {
+        viewModelScope.launch {
+            farmingRepo.climbBeanstalk(patchNumber)
+            _extra.update { it.copy(snackbarMessage = context.getString(R.string.farming_bean_climbed)) }
+        }
+    }
+
     fun harvestPatch(patchNumber: Int) {
         viewModelScope.launch {
             val patch = uiState.value.patches.firstOrNull { it.patchNumber == patchNumber } ?: return@launch
+            if (patch.cropType == "magic_bean") return@launch
             val crop  = gameData.crops[patch.cropType] ?: return@launch
 
             // Snapshot inventory before harvest to compute diff

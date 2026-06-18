@@ -30,6 +30,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
+import android.content.Context
+import com.fantasyidler.R
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 data class WorkerSkillsUiState(
     val skillLevels: Map<String, Int> = emptyMap(),
@@ -70,6 +73,7 @@ data class WorkerSkillsUiState(
 
 @HiltViewModel
 class WorkerSkillsViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val playerRepo: PlayerRepository,
     private val sessionRepo: SessionRepository,
     private val gameData: GameDataRepository,
@@ -349,7 +353,7 @@ class WorkerSkillsViewModel @Inject constructor(
                 workerStarter.startNextQueued(slot)
                 _uiState.update { it.copy(sheetSkill = null) }
             } else {
-                _uiState.update { it.copy(snackbarMessage = "Worker is already busy.", sheetSkill = null) }
+                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.worker_already_busy), sheetSkill = null) }
             }
         }
     }
@@ -362,8 +366,9 @@ class WorkerSkillsViewModel @Inject constructor(
         viewModelScope.launch {
             val slot = _uiState.value.selectedSlot
             val tier = uiState.value.currentWorker?.tier ?: return@launch
+            val qty = qty.coerceAtMost(tier.maxCraftQty)
             if (!playerRepo.consumeItems(mapOf(logKey to qty))) {
-                _uiState.update { it.copy(snackbarMessage = "Not enough logs.", sheetSkill = null) }
+                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.worker_not_enough_logs), sheetSkill = null) }
                 return@launch
             }
             val enqueued = playerRepo.enqueueWorkerAction(
@@ -381,7 +386,7 @@ class WorkerSkillsViewModel @Inject constructor(
                 _uiState.update { it.copy(sheetSkill = null) }
             } else {
                 playerRepo.addItem(logKey, qty)
-                _uiState.update { it.copy(snackbarMessage = "Worker is already busy.", sheetSkill = null) }
+                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.worker_already_busy), sheetSkill = null) }
             }
         }
     }
@@ -400,7 +405,7 @@ class WorkerSkillsViewModel @Inject constructor(
 
             val totalEssence = runeData.essenceCost * qty
             if (!playerRepo.consumeItems(mapOf("rune_essence" to totalEssence))) {
-                _uiState.update { it.copy(snackbarMessage = "Not enough Rune Essence.", sheetSkill = null) }
+                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.worker_not_enough_rune_essence), sheetSkill = null) }
                 return@launch
             }
             val enqueued = playerRepo.enqueueWorkerAction(
@@ -418,7 +423,7 @@ class WorkerSkillsViewModel @Inject constructor(
                 _uiState.update { it.copy(sheetSkill = null) }
             } else {
                 playerRepo.addItem("rune_essence", totalEssence)
-                _uiState.update { it.copy(snackbarMessage = "Worker is already busy.", sheetSkill = null) }
+                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.worker_already_busy), sheetSkill = null) }
             }
         }
     }
@@ -436,7 +441,7 @@ class WorkerSkillsViewModel @Inject constructor(
             val qty = qty.coerceAtMost(tier.maxCraftQty)
 
             if (!playerRepo.consumeItems(mapOf(boneKey to qty))) {
-                _uiState.update { it.copy(snackbarMessage = "Not enough ${bone.displayName}.", sheetSkill = null) }
+                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.error_not_enough_items, bone.displayName), sheetSkill = null) }
                 return@launch
             }
             val enqueued = playerRepo.enqueueWorkerAction(
@@ -454,7 +459,7 @@ class WorkerSkillsViewModel @Inject constructor(
                 _uiState.update { it.copy(sheetSkill = null) }
             } else {
                 playerRepo.addItem(boneKey, qty)
-                _uiState.update { it.copy(snackbarMessage = "Worker is already busy.", sheetSkill = null) }
+                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.worker_already_busy), sheetSkill = null) }
             }
         }
     }
@@ -488,7 +493,7 @@ class WorkerSkillsViewModel @Inject constructor(
 
             val totalMaterials = recipe.materials.mapValues { (_, v) -> v * qty }
             if (!playerRepo.consumeItems(totalMaterials)) {
-                _uiState.update { it.copy(snackbarMessage = "Not enough materials.", selectedRecipe = null, sheetSkill = null) }
+                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.worker_not_enough_materials), selectedRecipe = null, sheetSkill = null) }
                 return@launch
             }
             val enqueued = playerRepo.enqueueWorkerAction(
@@ -506,7 +511,7 @@ class WorkerSkillsViewModel @Inject constructor(
                 _uiState.update { it.copy(selectedRecipe = null, sheetSkill = null) }
             } else {
                 for ((item, needed) in totalMaterials) playerRepo.addItem(item, needed)
-                _uiState.update { it.copy(snackbarMessage = "Worker is already busy.", selectedRecipe = null, sheetSkill = null) }
+                _uiState.update { it.copy(snackbarMessage = context.getString(R.string.worker_already_busy), selectedRecipe = null, sheetSkill = null) }
             }
         }
     }

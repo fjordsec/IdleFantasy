@@ -36,6 +36,7 @@
     <string name="btn_enter_dungeon">Entrer dans le donjon</string>
     <string name="btn_enter_arena">Entrer dans l’arène</string>
     <string name="btn_activate">Activer</string>
+    <string name="btn_extend">Prolonger</string>
     <string name="btn_deactivate">Désactiver</string>
     <string name="btn_close">Fermer</string>
     <string name="btn_back">Retour</string>
@@ -276,15 +277,15 @@
     <!-- ===== QuestsScreen ===== -->
     <string name="label_claim_reward">Réclamer une récompense</string>
     <string name="label_daily">Quotidien</string>
-    <string name="label_weekly">Weekly</string>
+    <string name="label_weekly">Hebdomadaire</string>
     <string name="label_timed">Temporaire</string>
     <string name="label_daily_quests">Quêtes quotidiennes</string>
     <string name="label_daily_reset">Se réinitialise à 6 heures</string>
-    <string name="label_weekly_reset">Resets Monday at 6am</string>
-    <string name="weekly_bonus_title">Weekly Bonus!</string>
-    <string name="weekly_bonus_claim">Claim Weekly Bonus</string>
-    <string name="label_daily_info">Each daily quest rewards coins. Every quest also has a 1 in 100 chance to drop a piece of Dwarven gear.</string>
-    <string name="label_weekly_info">Each weekly challenge rewards coins based on its level requirement. Complete all 5 to earn a bonus: 100,000 coins, or a 1 in 26 chance at a piece of Divine gear.</string>
+    <string name="label_weekly_reset">Se réinitialise le lundi à 6h</string>
+    <string name="weekly_bonus_title">Bonus hebdomadaire !</string>
+    <string name="weekly_bonus_claim">Réclamer le bonus hebdomadaire</string>
+    <string name="label_daily_info">Chaque quête quotidienne rapporte des pièces. Chaque quête a également 1 chance sur 100 de faire tomber un équipement nanique.</string>
+    <string name="label_weekly_info">Chaque défi hebdomadaire rapporte des pièces selon son niveau requis. Complétez les 5 pour gagner un bonus : 100 000 pièces, ou 1 chance sur 26 d\'obtenir un équipement divin.</string>
     <string name="label_daily_reward">2 000 pièces (1/100 : équipement nanique)</string>
     <string name="msg_daily_claimed_coins">Quête quotidienne terminée ! +2 000 pièces.</string>
     <string name="msg_daily_claimed_dwarven">Quête quotidienne terminée ! Vous avez trouvé %1$s !</string>
@@ -537,6 +538,10 @@
     <string name="crafting_needed_have">%1$d (en possession : %2$d)</string>
     <!-- Note : %1$d = quantité en inventaire -->
     <string name="crafting_in_inventory">En inventaire : ×%1$d</string>
+    <string name="crafting_quest_targets">Objectifs de quête</string>
+    <string name="quest_fill_daily">Quotidien</string>
+    <string name="quest_fill_weekly">Hebdomadaire</string>
+    <string name="quest_fill_guild">Guilde</string>
 
     <!-- Écran de farming -->
     <!-- Note : %1$s = nom de la culture -->
@@ -623,8 +628,10 @@
     <string name="achievement_combat_50_desc">Atteindre le niveau de combat 50</string>
     <string name="achievement_combat_75_name">Élite</string>
     <string name="achievement_combat_75_desc">Atteindre le niveau de combat 75</string>
-    <string name="achievement_combat_99_name">Inarretâble</string>
+    <string name="achievement_combat_99_name">Champion</string>
     <string name="achievement_combat_99_desc">Atteindre le niveau de combat 99</string>
+    <string name="achievement_combat_113_name">Inarrêtable</string>
+    <string name="achievement_combat_113_desc">Atteindre le niveau de combat maximum de 113</string>
     <string name="achievement_quest_1_name">Chercheur de quête</string>
     <string name="achievement_quest_1_desc">Terminez 1 quête</string>
     <string name="achievement_quest_5_name">Spécialiste</string>
@@ -693,7 +700,7 @@
     <string name="worker_apprentice">Apprenti</string>
     <string name="worker_journeyman">Compagnon</string>
     <string name="worker_master">Maître</string>
-    <string name="inn_long_laborer_desc">8h de collecte, efficacité 0.5x. Pas d’artisanat ni de prière ni fabrication de runes. Mettez autant de travail que vous voulez. Il est lent, mais il fera tout.</string>
+    <string name="inn_long_laborer_desc">Un emploi par embauche, renvoyé après la collecte. 8h de collecte, efficacité 0,5x, quantité d’artisanat illimitée. Il est lent, mais il fait tout.</string>
     <string name="inn_apprentice_desc">8h de collecte, efficacité 1x. artisanat, prière et fabrication de runes plafonnés à 480 objets par session.</string>
     <string name="inn_journeyman_desc">6h de collecte, efficacité 1.25x. artisanat, prière et fabrication de runes plafonnés à 360 objets par session.</string>
     <string name="inn_master_desc">4h de collecte, efficacité 2x. artisanat, prière et fabrication de runes plafonnés à 240 objets par session.</string>
@@ -863,7 +870,7 @@
     <string name="settings_backup_failed">Échec de la sauvegarde.</string>
     <string name="settings_backup_folder_set">Dossier de sauvegarde défini.</string>
     <string name="home_town_title">Ville</string>
-    <string name="home_town_desc">Visitez la boutique, l\'auberge, la guilde, l\'église, l\'atelier du constructeur, le maître chasseur et le coin des jeux</string>
+    <string name="home_town_desc">Visitez la boutique, l\'auberge, la guilde, l\'église, l\'atelier du constructeur, le maître chasseur et le carnaval</string>
     <string name="guild_dailies_available">Quêtes quotidiennes disponibles</string>
     <string name="guild_do_dailies_hint">Faites des quêtes pour augmenter votre réputation</string>
     <string name="guild_quest_gate_blocked">Accomplir des quêtes pour monter en grade</string>
@@ -954,7 +961,7 @@
     <string name="shop_cat_logs_and_wood">Bûches &amp; Bois</string>
     <string name="shop_cat_seeds_and_farming">Graines &amp; Agriculture</string>
     <string name="shop_cat_merchants_guild">Guilde des Marchands</string>
-    <string name="shop_cat_equipment">Equipment</string>
+    <string name="shop_cat_equipment">Équipement</string>
     <string name="shop_cat_special">Spécial</string>
     <string name="shop_cat_weapons">Armes</string>
     <string name="shop_cat_armor">Armure</string>
@@ -981,7 +988,7 @@
     <string name="crafting_cat_tool">Outil</string>
     <string name="crafting_cat_weapon">Arme</string>
     <string name="crafting_cat_armour">Armure</string>
-    <string name="crafting_cat_equipment">Equipment</string>
+    <string name="crafting_cat_equipment">Équipement</string>
     <string name="crafting_cat_food">Nourriture</string>
     <string name="crafting_cat_ammunition">Munitions</string>
     <string name="crafting_cat_jewellery">Bijoux</string>
@@ -1133,4 +1140,149 @@
     <string name="item_amulet_of_the_void_name">Amulette du Vide</string>
     <string name="item_amulet_of_the_void_desc">Un pendentif de pure essence du vide. Améliore toutes les statistiques de combat du porteur.</string>
 
+
+    <!-- ===== Carnival ===== -->
+    <string name="carnival_title">Carnaval</string>
+    <string name="carnival_desc">Jeux, prix et festivités!</string>
+    <string name="carnival_ticket_balance">Tickets : %1$d</string>
+    <string name="carnival_idle_tab">Jeux en file</string>
+    <string name="carnival_active_tab">Jeux actifs</string>
+    <string name="carnival_shop_tab">Boutique des prix</string>
+    <string name="carnival_idle_hint">Mettez une session en file pour gagner des tickets. Un niveau plus élevé signifie plus de tickets.</string>
+    <string name="carnival_archery_range">Stand de tir à l\'arc</string>
+    <string name="carnival_idle_desc_archery">Tirez sur des cibles mobiles. Le niveau de distance augmente le rendement.</string>
+    <string name="carnival_strongman_competition">Concours de force</string>
+    <string name="carnival_idle_desc_strongman">Soulevez des pierres et balancez des marteaux. La force augmente le rendement.</string>
+    <string name="carnival_wizards_duel">Duel de sorciers</string>
+    <string name="carnival_idle_desc_wizard">Lancez des sorts d\'illusion contre des mages rivaux. La magie augmente le rendement.</string>
+    <string name="carnival_fishing_derby">Tournoi de pêche</string>
+    <string name="carnival_idle_desc_fishing">Attrapez le plus grand poisson dans l\'étang. La pêche augmente le rendement.</string>
+    <string name="carnival_skill_level">%1$s Nv.%2$d</string>
+    <string name="carnival_ticket_yield">~%1$d tickets/session</string>
+    <string name="carnival_queue">Mettre en file</string>
+    <string name="carnival_ring_toss">Lancer d\'anneaux</string>
+    <string name="carnival_active_ring_desc">Lancez quand l\'indicateur atteint la zone cible dorée.</string>
+    <string name="carnival_ring_target_hint">Visez le centre (45%%–55%%)</string>
+    <string name="carnival_throw">Lancer!</string>
+    <string name="carnival_hammer_strike">Coup de marteau</string>
+    <string name="carnival_active_hammer_desc">Frappez quand le jauge de puissance est à son maximum.</string>
+    <string name="carnival_power_label">Jauge de puissance</string>
+    <string name="carnival_hammer_miss_zone">Raté</string>
+    <string name="carnival_hammer_good_zone">Bien</string>
+    <string name="carnival_hammer_perfect_zone">Parfait!</string>
+    <string name="carnival_strike">Frapper!</string>
+    <string name="carnival_potion_sequence">Séquence de potions</string>
+    <string name="carnival_active_sequence_desc">Observez les couleurs des potions et répétez-les dans le même ordre.</string>
+    <string name="carnival_sequence_watch">Observez la séquence…</string>
+    <string name="carnival_sequence_input">Touchez la couleur %1$d sur %2$d</string>
+    <string name="carnival_item_appraisal">Estimation d\'objet</string>
+    <string name="carnival_active_appraisal_desc">Quel objet vaut plus sur le marché?</string>
+    <string name="carnival_appraisal_which">Lequel vaut plus?</string>
+    <string name="carnival_play">Jouer</string>
+    <string name="carnival_cooldown">Prêt dans %1$dh %2$dm</string>
+    <string name="carnival_ticket_cost">%1$d tickets</string>
+    <string name="carnival_redeem">Échanger</string>
+    <string name="carnival_queue_added">Ajouté à la file: %1$s.</string>
+    <string name="carnival_queue_full">La file est pleine (3/3).</string>
+    <string name="carnival_ring_won">Dans le mille! +%1$d tickets</string>
+    <string name="carnival_ring_missed">Cible manquée!</string>
+    <string name="carnival_hammer_perfect">Coup parfait! +%1$d tickets</string>
+    <string name="carnival_hammer_good">Bon coup! +%1$d tickets</string>
+    <string name="carnival_hammer_miss">Coup manqué!</string>
+    <string name="carnival_sequence_correct">Séquence correcte! +%1$d tickets</string>
+    <string name="carnival_sequence_wrong">Mauvais ordre! Réessayez.</string>
+    <string name="carnival_appraisal_correct">Exact ! +%1$d tickets</string>
+    <string name="carnival_appraisal_wrong">Faux! L\'objet le plus précieux était %1$s.</string>
+    <string name="carnival_redeemed">Échangé: %1$s!</string>
+    <string name="carnival_not_enough_tickets">Pas assez de tickets.</string>
+    <string name="carnival_lamp_redeemed">+%1$d XP en %2$s!</string>
+
+    <!-- ===== Magic Bean / Farming ===== -->
+    <string name="farming_bean_note_1">Une minuscule pousse a percé le sol.</string>
+    <string name="farming_bean_note_2">La tige pousse à une vitesse surnaturelle.</string>
+    <string name="farming_bean_note_3">Les feuilles sont énormes — comme rien de ce que vous avez vu.</string>
+    <string name="farming_bean_note_4">Des nuages ont commencé à se rassembler autour de la tige supérieure...</string>
+    <string name="farming_bean_note_5">D\'étranges sons descendent de quelque part là-haut.</string>
+    <string name="farming_bean_note_6">Un grondement lointain. Quelque chose s\'agite dans les hauteurs.</string>
+    <string name="farming_bean_note_7">Le haricot magique frémit. Quelque chose attend au sommet.</string>
+    <string name="farming_bean_note_8">Presque là. L\'air se raréfie. Vous pouvez presque voir le sommet.</string>
+    <string name="farming_bean_ready">Le haricot magique s\'étend au-delà des nuages. Prêt à grimper?</string>
+    <string name="farming_bean_climb">Grimper</string>
+    <string name="farming_bean_climbed">Vous avez grimpé le haricot magique. Quelque chose vous attend...</string>
+    <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
+    <string name="farming_magic_bean_one_plot">Les haricots magiques ne peuvent être plantés que sur une parcelle</string>
+
+    <!-- ===== Armory Tab ===== -->
+    <string name="armory_tab">Armurerie</string>
+    <string name="tab_bonuses">Bonus</string>
+    <string name="bonus_none">Aucun bonus d\'XP actif</string>
+    <string name="bonus_all_skills">Toutes les compétences</string>
+    <string name="bonus_section_boosts">Bonus actifs</string>
+    <string name="bonus_section_skills">Skill Bonuses</string>
+    <string name="bonus_combat_stat_boost">Boosts combat stats</string>
+    <string name="snackbar_added_to_queue">Ajouté à la file: %1$s.</string>
+    <string name="snackbar_queue_full">La file est pleine (3/3).</string>
+    <string name="home_not_enough_coins_repeat">Pas assez de pièces pour répéter %1$s.</string>
+    <string name="home_not_enough_materials_repeat">Pas assez de matériaux pour répéter %1$s.</string>
+    <string name="combat_start_failed">Impossible de démarrer: %1$s</string>
+    <string name="combat_select_spell">Select a spell before entering.</string>
+    <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
+    <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
+    <string name="armory_not_owned">Vous ne possédez pas cet objet.</string>
+    <string name="armory_how_to_obtain">Comment obtenir</string>
+    <string name="armory_no_stats">Aucun bonus de statistiques.</string>
+    <string name="armory_filter_all">Tous</string>
+    <string name="armory_filter_weapons">Armes</string>
+    <string name="armory_filter_armor">Armure</string>
+    <string name="armory_filter_accessories">Accessoires</string>
+    <string name="armory_filter_tools">Outils</string>
+
+    <!-- Session / queue messages (issue #596) -->
+    <string name="skill_no_logs">Pas de rondins dans l\'inventaire</string>
+    <string name="skill_not_enough_rune_essence">Pas assez d\'Essence de Runes</string>
+    <string name="skill_not_enough_item">Pas assez de %1$s</string>
+    <string name="skill_not_enough_materials">Pas assez de matériaux</string>
+    <string name="skill_session_start_failed">Impossible de démarrer la session: %1$s</string>
+    <string name="skill_added_to_queue_activity">Ajouté à la file: %1$s — %2$s.</string>
+    <string name="worker_already_busy">L\'ouvrier est déjà occupé.</string>
+    <string name="worker_not_enough_logs">Pas assez de rondins.</string>
+    <string name="worker_not_enough_rune_essence">Pas assez d\'Essence de Runes.</string>
+    <string name="worker_not_enough_materials">Pas assez de matériaux.</string>
+    <string name="shop_no_junk">Rien d\'inutile à vendre</string>
+    <string name="shop_sold_junk">Objets inutiles vendus pour %1$s pièces</string>
+    <string name="shop_no_old_equipment">Pas d\'équipement obsolète à vendre</string>
+    <string name="shop_sold_old_equipment">Équipement obsolète vendu pour %1$s pièces</string>
+    <string name="shop_bulk_sell_total">Total</string>
+    <string name="shop_bulk_sell_confirm">Tout vendre</string>
+    <string name="shop_xp_boost_activated">Bonus XP 2× activé pour %1$dh!</string>
+    <string name="shop_not_enough_in_inventory">Pas assez dans l\'inventaire</string>
+    <string name="shop_bought_item">%1$d× %2$s acheté</string>
+    <string name="shop_sold_item">%1$d× %2$s vendu pour %3$d pièces</string>
+    <string name="quest_complete_notification">Quête terminée: %1$s!</string>
+    <string name="quest_complete_with_rewards">Quête terminée: %1$s! Réclamé: %2$s</string>
+    <string name="quest_daily_complete_coins">Quête journalière terminée! +%1$s pièces</string>
+    <string name="quest_daily_complete_dwarven">Quête journalière terminée! Vous avez trouvé de l\'équipement nain!</string>
+    <string name="quest_weekly_complete">Défi hebdomadaire terminé! +%1$s pièces</string>
+    <string name="quest_weekly_bonus_complete_coins">Tous les défis hebdomadaires terminés! +%1$s pièces</string>
+    <string name="quest_weekly_bonus_complete_divine">Tous les défis hebdomadaires terminés! Vous avez trouvé de l\'équipement divin!</string>
+    <string name="guild_contributed_items">%1$d objets contribués.</string>
+    <string name="mercantile_not_enough_coins">Pas assez de pièces (besoin de %1$s pièces).</string>
+    <string name="mercantile_route_start_failed">Impossible de démarrer la route: %1$s</string>
+    <string name="mercantile_added_to_queue">Ajouté à la file: Mercantile — %1$s.</string>
+    <string name="inventory_requires_to_equip">Nécessite %1$s pour équiper.</string>
+    <string name="home_found_pet">Vous avez trouvé un familier: %1$s!</string>
+    <string name="home_congratulations_received">Félicitations! Vous avez reçu: %1$s</string>
+    <string name="combat_no_food_title">Pas de nourriture équipée</string>
+    <string name="combat_no_food_body">Vous n\'avez pas de nourriture équipée. Sans nourriture, vous risquez de mourir rapidement et de perdre la plupart de vos récompenses. Commencer quand même?</string>
+    <string name="combat_start_anyway">Commencer quand même</string>
+    <string name="combat_xp_consolation">XP (consolation)</string>
+    <string name="bestiary_loot_item_header">Objet</string>
+    <string name="worker_no_mats">Pas de mat.</string>
+
+    <!-- Boss Descriptions -->
+    <string name="boss_king_black_dragon_desc">Le légendaire dragon à trois têtes, craint dans tout le royaume.</string>
+    <string name="boss_demon_lord_desc">Un ancien démon des abysses, maître de la magie noire.</string>
+    <string name="boss_kraken_desc">La terreur des mers profondes, un monstre marin colossal.</string>
+    <string name="boss_balrog_desc">Un ancien démon de flammes et d\'ombres, réveillé de son sommeil profond sous la terre.</string>
+    <string name="boss_void_sovereign_desc">L\'entité primordiale derrière les failles du vide. Ancienne au-delà de toute mesure, elle considère les challengers mortels avec mépris.</string>
 </resources>

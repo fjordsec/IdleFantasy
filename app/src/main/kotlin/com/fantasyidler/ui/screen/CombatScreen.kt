@@ -34,6 +34,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.ScrollableTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -161,7 +162,7 @@ fun CombatScreen(
             val pagerState = rememberPagerState(initialPage = if (startOnGear) 2 else 0, pageCount = { 4 })
             val scope = rememberCoroutineScope()
             Column(Modifier.padding(padding).fillMaxSize()) {
-                TabRow(selectedTabIndex = pagerState.currentPage) {
+                ScrollableTabRow(selectedTabIndex = pagerState.currentPage, edgePadding = 0.dp) {
                     Tab(
                         selected = pagerState.currentPage == 0,
                         onClick  = { scope.launch { pagerState.animateScrollToPage(0) } },
@@ -399,16 +400,16 @@ fun CombatScreen(
     if (state.noFoodWarningPending) {
         AlertDialog(
             onDismissRequest = viewModel::dismissNoFoodWarning,
-            title = { Text("No food equipped") },
-            text  = { Text("You have no food equipped. Without food you may die quickly and lose most of your rewards. Start anyway?") },
+            title = { Text(stringResource(R.string.combat_no_food_title)) },
+            text  = { Text(stringResource(R.string.combat_no_food_body)) },
             confirmButton = {
                 TextButton(onClick = viewModel::confirmStartWithoutFood) {
-                    Text("Start anyway")
+                    Text(stringResource(R.string.combat_start_anyway))
                 }
             },
             dismissButton = {
                 TextButton(onClick = viewModel::dismissNoFoodWarning) {
-                    Text("Cancel")
+                    Text(stringResource(android.R.string.cancel))
                 }
             },
         )
@@ -448,7 +449,7 @@ private fun CombatSelectionList(
                 runCount       = dungeonRuns[dungeon.name] ?: 0,
                 onTap          = { onDungeon(dungeon) },
                 loreLockedHint = if (dungeon.loreUnlockOnly && !unlocked)
-                    stringResource(R.string.expedition_discover_hint) else null,
+                    dungeon.loreHint ?: stringResource(R.string.expedition_discover_hint) else null,
             )
         }
         item { CombatSectionHeader(stringResource(R.string.combat_solo_bosses)) }
@@ -2096,7 +2097,7 @@ private fun CombatResultSheet(
         // XP per skill
         if (result.xpPerSkill.isNotEmpty()) {
             Text(
-                text  = if (result.won) stringResource(R.string.label_xp_gained) else "XP (consolation)",
+                text  = if (result.won) stringResource(R.string.label_xp_gained) else stringResource(R.string.combat_xp_consolation),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

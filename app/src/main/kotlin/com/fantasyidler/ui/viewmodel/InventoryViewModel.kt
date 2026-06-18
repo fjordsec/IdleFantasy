@@ -23,9 +23,11 @@ import com.fantasyidler.data.json.ThievingNpcData
 import com.fantasyidler.data.json.TradeRouteData
 import com.fantasyidler.data.json.TreeData
 import android.content.Context
+import com.fantasyidler.data.json.BlessingType
 import com.fantasyidler.data.model.EquipSlot
 import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.Skills
+import com.fantasyidler.repository.ChurchRepository
 import com.fantasyidler.repository.GameDataRepository
 import com.fantasyidler.repository.PlayerRepository
 import com.fantasyidler.util.GameStrings
@@ -39,9 +41,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
+import com.fantasyidler.R
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 @HiltViewModel
 class InventoryViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val playerRepo: PlayerRepository,
     private val gameData: GameDataRepository,
     private val json: Json,
@@ -68,6 +73,11 @@ class InventoryViewModel @Inject constructor(
         val snackbarMessage: String? = null,
         val skillingDungeonNotes: Map<String, Int> = emptyMap(),
         val unlockedDungeons: List<String> = emptyList(),
+        val xpBoostExpiresAt: Long = 0L,
+        val activeBlessingKey: String = "",
+        val activeBlessingExpiresAt: Long = 0L,
+        val activeBlessingXpPct: Int = 0,
+        val skillPrestige: Map<String, Int> = emptyMap(),
     ) {
         val totalLevel: Int get() = skillLevels.values.sum()
 
@@ -130,6 +140,14 @@ class InventoryViewModel @Inject constructor(
                 characterRace         = flags.characterRace,
                 skillingDungeonNotes  = flags.skillingDungeonNotes,
                 unlockedDungeons      = flags.unlockedDungeons,
+                xpBoostExpiresAt        = flags.xpBoostExpiresAt,
+                activeBlessingKey       = flags.activeBlessingKey,
+                activeBlessingExpiresAt = flags.activeBlessingExpiresAt,
+                activeBlessingXpPct     = run {
+                    val b = ChurchRepository.activeBlessing(flags) ?: return@run 0
+                    if (b.type == BlessingType.XP) ((b.magnitude - 1f) * 100 + 0.5f).toInt() else 0
+                },
+                skillPrestige           = flags.skillPrestige,
                 isLoading   = false,
             )
         }
@@ -149,7 +167,7 @@ class InventoryViewModel @Inject constructor(
                 val msg = unmetReqs.joinToString(", ") { (skill, lvl) ->
                     "${skill.replaceFirstChar { c -> c.uppercase() }} $lvl"
                 }
-                _extra.update { it.copy(snackbarMessage = "Requires $msg to equip.") }
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.inventory_requires_to_equip, msg)) }
                 return@launch
             }
             val current = playerRepo.getEquipped().toMutableMap()
@@ -189,7 +207,10 @@ class InventoryViewModel @Inject constructor(
                             EquipSlot.AXE         -> item.woodcuttingEfficiency ?: 0f
                             EquipSlot.FISHING_ROD -> item.fishingEfficiency ?: 0f
                             EquipSlot.HOE         -> item.farmingEfficiency ?: 0f
-                            else -> (item.attackBonus + item.strengthBonus + item.defenseBonus).toFloat()
+                            else -> if (slot in EquipSlot.WEAPON_SLOTS)
+                            item.attackBonus * 1.5f + item.strengthBonus * 1.0f + item.defenseBonus * 0.5f
+                        else
+                            item.defenseBonus * 2.0f + item.attackBonus * 1.0f + item.strengthBonus * 0.5f
                         }
                     }
 

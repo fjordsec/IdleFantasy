@@ -37,6 +37,7 @@
     <string name="btn_enter_dungeon">Dungeon betreten</string>
     <string name="btn_enter_arena">Arena betreten</string>
     <string name="btn_activate">Aktivieren</string>
+    <string name="btn_extend">Verlängern</string>
     <string name="btn_deactivate">Deaktivieren</string>
     <string name="btn_close">Schließen</string>
     <string name="btn_back">Zurück</string>
@@ -387,7 +388,7 @@
 
     <!-- ===== translate — HomeScreen ===== -->
     <string name="home_town_title">Stadt</string>
-    <string name="home_town_desc">Besuche den Laden, die Herberge, die Gilde, die Kirche, die Bauwerkstatt, den Slayer-Meister und die Spielecke</string>
+    <string name="home_town_desc">Besuche den Laden, die Herberge, die Gilde, die Kirche, die Bauwerkstatt, den Slayer-Meister und den Jahrmarkt</string>
     <string name="guild_dailies_available">Tagesaufgaben verfügbar</string>
     <string name="guild_do_dailies_hint">Erledigt Tagesaufgaben, um Euer Ansehen zu verbessern</string>
     <string name="guild_quest_gate_blocked">Schließt Missionen ab, um im Rang aufzusteigen</string>
@@ -539,6 +540,10 @@
     <string name="crafting_increase">Mehr</string>
     <string name="crafting_needed_have">%1$d (%2$d vorhanden)</string>
     <string name="crafting_in_inventory">In Besitz: ×%1$d</string>
+    <string name="crafting_quest_targets">Questziele</string>
+    <string name="quest_fill_daily">Täglich</string>
+    <string name="quest_fill_weekly">Wöchentlich</string>
+    <string name="quest_fill_guild">Gilde</string>
 
     <!-- ===== FarmingScreen ===== -->
     <string name="farming_harvested">%1$s geerntet</string>
@@ -618,7 +623,7 @@
     <string name="worker_apprentice">Lehrling</string>
     <string name="worker_journeyman">Geselle</string>
     <string name="worker_master">Meister</string>
-    <string name="inn_long_laborer_desc">8h Sammeln, 0.5-fache Effizienz. Keine Beschränkung für Herstellung, Gebet und Runenherstellung. Fügt zur Warteschlange soviel Ihr wollt hinzu. Er ist langsam, sich aber für nichts zu schade.</string>
+    <string name="inn_long_laborer_desc">Ein Auftrag pro Einstellung, nach Einsammeln entlassen. 8h Sammeln, 0,5-fache Effizienz, unbegrenzte Handwerksmenge. Er ist langsam, aber er macht alles.</string>
     <string name="inn_apprentice_desc">8h Sammeln, 1-fache Effizienz. Herstellung, Gebet und Runenherstellung ist auf 480 Gegenstände pro Aktivität begrenzt.</string>
     <string name="inn_journeyman_desc">6h Sammeln, 1.25-fache Effizienz. Herstellung, Gebet und Runenherstellung ist auf 360 Gegenstände pro Aktivität begrenzt.</string>
     <string name="inn_master_desc">4h Sammeln, 2-fache Effizienz. Herstellung, Gebet und Runenherstellung ist auf 240 Gegenstände pro Aktivität begrenzt.</string>
@@ -688,8 +693,10 @@
     <string name="achievement_combat_50_desc">Erreicht Kampflevel 50</string>
     <string name="achievement_combat_75_name">Elite</string>
     <string name="achievement_combat_75_desc">Erreicht Kampflevel 75</string>
-    <string name="achievement_combat_99_name">Höchstes Kampflevel</string>
+    <string name="achievement_combat_99_name">Champion</string>
     <string name="achievement_combat_99_desc">Erreicht Kampflevel 99</string>
+    <string name="achievement_combat_113_name">Höchstes Kampflevel</string>
+    <string name="achievement_combat_113_desc">Erreicht das maximale Kampflevel von 113</string>
     <string name="achievement_quest_1_name">Missionar</string>
     <string name="achievement_quest_1_desc">Beendet 1 Mission</string>
     <string name="achievement_quest_5_name">Passioniert</string>
@@ -1109,4 +1116,149 @@
     <string name="item_amulet_of_the_void_name">Amulett der Leere</string>
     <string name="item_amulet_of_the_void_desc">Ein Anhänger aus reiner Leerenessenz. Verbessert alle Kampfwerte des Trägers.</string>
 
+
+    <!-- ===== Carnival ===== -->
+    <string name="carnival_title">Jahrmarkt</string>
+    <string name="carnival_desc">Spiele, Preise und Fröhlichkeit!</string>
+    <string name="carnival_ticket_balance">Tickets: %1$d</string>
+    <string name="carnival_idle_tab">Warteschlangen-Spiele</string>
+    <string name="carnival_active_tab">Aktive Spiele</string>
+    <string name="carnival_shop_tab">Preisladen</string>
+    <string name="carnival_idle_hint">Reihe eine Sitzung ein, um Tickets zu verdienen. Ein höheres Fertigkeitslevel bedeutet mehr Tickets.</string>
+    <string name="carnival_archery_range">Schießstand</string>
+    <string name="carnival_idle_desc_archery">Schieße auf bewegliche Ziele. Fernkampf-Level erhöht die Ausbeute.</string>
+    <string name="carnival_strongman_competition">Starker-Mann-Wettbewerb</string>
+    <string name="carnival_idle_desc_strongman">Hebe Steine und schwinge Hämmer. Stärke-Level erhöht die Ausbeute.</string>
+    <string name="carnival_wizards_duel">Zaubererduell</string>
+    <string name="carnival_idle_desc_wizard">Wirf Illusionszauber gegen rivalisierende Magier. Magie-Level erhöht die Ausbeute.</string>
+    <string name="carnival_fishing_derby">Angelturnier</string>
+    <string name="carnival_idle_desc_fishing">Fange den größten Fisch im Festivalteich. Angelkunde-Level erhöht die Ausbeute.</string>
+    <string name="carnival_skill_level">%1$s Lv.%2$d</string>
+    <string name="carnival_ticket_yield">~%1$d Tickets/Sitzung</string>
+    <string name="carnival_queue">Sitzung einreihen</string>
+    <string name="carnival_ring_toss">Ringewerfen</string>
+    <string name="carnival_active_ring_desc">Zeit deinen Wurf, wenn der Zeiger die goldene Zielzone trifft.</string>
+    <string name="carnival_ring_target_hint">Ziele auf die Mitte (45%%–55%%)</string>
+    <string name="carnival_throw">Werfen!</string>
+    <string name="carnival_hammer_strike">Hammerschlag</string>
+    <string name="carnival_active_hammer_desc">Schlage zu, wenn der Kraftmesser seinen Höchstwert erreicht.</string>
+    <string name="carnival_power_label">Kraftmesser</string>
+    <string name="carnival_hammer_miss_zone">Verfehlt</string>
+    <string name="carnival_hammer_good_zone">Gut</string>
+    <string name="carnival_hammer_perfect_zone">Perfekt!</string>
+    <string name="carnival_strike">Schlagen!</string>
+    <string name="carnival_potion_sequence">Trank-Reihenfolge</string>
+    <string name="carnival_active_sequence_desc">Beobachte die Tränke und tippe sie in derselben Reihenfolge.</string>
+    <string name="carnival_sequence_watch">Beobachte die Sequenz…</string>
+    <string name="carnival_sequence_input">Tippe Farbe %1$d von %2$d</string>
+    <string name="carnival_item_appraisal">Gegenstand-Bewertung</string>
+    <string name="carnival_active_appraisal_desc">Welcher Gegenstand ist auf dem freien Markt mehr wert?</string>
+    <string name="carnival_appraisal_which">Was ist mehr wert?</string>
+    <string name="carnival_play">Spielen</string>
+    <string name="carnival_cooldown">Bereit in %1$dh %2$dm</string>
+    <string name="carnival_ticket_cost">%1$d Tickets</string>
+    <string name="carnival_redeem">Einlösen</string>
+    <string name="carnival_queue_added">Zur Warteschlange hinzugefügt: %1$s.</string>
+    <string name="carnival_queue_full">Warteschlange ist voll (3/3).</string>
+    <string name="carnival_ring_won">Volltreffer! +%1$d Tickets</string>
+    <string name="carnival_ring_missed">Ziel verfehlt!</string>
+    <string name="carnival_hammer_perfect">Perfekter Schlag! +%1$d Tickets</string>
+    <string name="carnival_hammer_good">Guter Treffer! +%1$d Tickets</string>
+    <string name="carnival_hammer_miss">Schlag verfehlt!</string>
+    <string name="carnival_sequence_correct">Sequenz korrekt! +%1$d Tickets</string>
+    <string name="carnival_sequence_wrong">Falsche Reihenfolge! Versuche es erneut.</string>
+    <string name="carnival_appraisal_correct">Richtig! +%1$d Tickets</string>
+    <string name="carnival_appraisal_wrong">Falsch! Der wertvollere Gegenstand war %1$s.</string>
+    <string name="carnival_redeemed">Eingelöst: %1$s!</string>
+    <string name="carnival_not_enough_tickets">Nicht genug Tickets.</string>
+    <string name="carnival_lamp_redeemed">+%1$d EP in %2$s!</string>
+
+    <!-- ===== Magic Bean / Farming ===== -->
+    <string name="farming_bean_note_1">Ein kleiner Spross hat sich durch die Erde gedrückt.</string>
+    <string name="farming_bean_note_2">Der Stängel wächst auf unnatürliche Weise.</string>
+    <string name="farming_bean_note_3">Die Blätter sind riesig — so etwas hast du noch nie gesehen.</string>
+    <string name="farming_bean_note_4">Wolken beginnen sich um den oberen Stängel zu sammeln...</string>
+    <string name="farming_bean_note_5">Seltsame Geräusche klingen von irgendwo weit oben herab.</string>
+    <string name="farming_bean_note_6">Fernes Grollen. Etwas regt sich in der Höhe.</string>
+    <string name="farming_bean_note_7">Der Bohnenstängel zittert. Etwas wartet an der Spitze.</string>
+    <string name="farming_bean_note_8">Fast da. Die Luft wird dünner. Du kannst die Spitze fast sehen.</string>
+    <string name="farming_bean_ready">Der Bohnenstängel reicht über die Wolken hinaus. Bereit zu klettern?</string>
+    <string name="farming_bean_climb">Klettern</string>
+    <string name="farming_bean_climbed">Du hast den Bohnenstängel erklommen. Etwas wartet...</string>
+    <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
+    <string name="farming_magic_bean_one_plot">Magische Bohnen können nur auf einem Feld gepflanzt werden</string>
+
+    <!-- ===== Armory Tab ===== -->
+    <string name="armory_tab">Rüstkammer</string>
+    <string name="tab_bonuses">Boni</string>
+    <string name="bonus_none">Keine aktiven XP-Boni</string>
+    <string name="bonus_all_skills">Alle Fähigkeiten</string>
+    <string name="bonus_section_boosts">Aktive Boni</string>
+    <string name="bonus_section_skills">Skill Bonuses</string>
+    <string name="bonus_combat_stat_boost">Boosts combat stats</string>
+    <string name="snackbar_added_to_queue">Zur Warteschlange hinzugefügt: %1$s.</string>
+    <string name="snackbar_queue_full">Warteschlange ist voll (3/3).</string>
+    <string name="home_not_enough_coins_repeat">Nicht genug Münzen, um %1$s zu wiederholen.</string>
+    <string name="home_not_enough_materials_repeat">Nicht genug Material, um %1$s zu wiederholen.</string>
+    <string name="combat_start_failed">Konnte nicht gestartet werden: %1$s</string>
+    <string name="combat_select_spell">Select a spell before entering.</string>
+    <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
+    <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
+    <string name="armory_not_owned">Du besitzt diesen Gegenstand nicht.</string>
+    <string name="armory_how_to_obtain">Wie zu erhalten</string>
+    <string name="armory_no_stats">Keine Statusboni.</string>
+    <string name="armory_filter_all">Alle</string>
+    <string name="armory_filter_weapons">Waffen</string>
+    <string name="armory_filter_armor">Rüstung</string>
+    <string name="armory_filter_accessories">Accessoires</string>
+    <string name="armory_filter_tools">Werkzeuge</string>
+
+    <!-- Session / queue messages (issue #596) -->
+    <string name="skill_no_logs">Keine Holzscheite im Inventar</string>
+    <string name="skill_not_enough_rune_essence">Nicht genug Runenessenz</string>
+    <string name="skill_not_enough_item">Nicht genug %1$s</string>
+    <string name="skill_not_enough_materials">Nicht genug Material</string>
+    <string name="skill_session_start_failed">Sitzung konnte nicht gestartet werden: %1$s</string>
+    <string name="skill_added_to_queue_activity">Zur Warteschlange hinzugefügt: %1$s — %2$s.</string>
+    <string name="worker_already_busy">Der Arbeiter ist bereits beschäftigt.</string>
+    <string name="worker_not_enough_logs">Nicht genug Holzscheite.</string>
+    <string name="worker_not_enough_rune_essence">Nicht genug Runenessenz.</string>
+    <string name="worker_not_enough_materials">Nicht genug Material.</string>
+    <string name="shop_no_junk">Kein Schrott zu verkaufen</string>
+    <string name="shop_sold_junk">Schrott für %1$s Münzen verkauft</string>
+    <string name="shop_no_old_equipment">Keine alte Ausrüstung zu verkaufen</string>
+    <string name="shop_sold_old_equipment">Alte Ausrüstung für %1$s Münzen verkauft</string>
+    <string name="shop_bulk_sell_total">Gesamt</string>
+    <string name="shop_bulk_sell_confirm">Alles verkaufen</string>
+    <string name="shop_xp_boost_activated">2×-XP-Boost für %1$d Stunden aktiviert!</string>
+    <string name="shop_not_enough_in_inventory">Nicht genug im Inventar</string>
+    <string name="shop_bought_item">%1$d× %2$s gekauft</string>
+    <string name="shop_sold_item">%1$d× %2$s für %3$d Münzen verkauft</string>
+    <string name="quest_complete_notification">Aufgabe abgeschlossen: %1$s!</string>
+    <string name="quest_complete_with_rewards">Aufgabe abgeschlossen: %1$s! Belohnung: %2$s</string>
+    <string name="quest_daily_complete_coins">Tagesaufgabe abgeschlossen! +%1$s Münzen</string>
+    <string name="quest_daily_complete_dwarven">Tagesaufgabe abgeschlossen! Du hast Zwergenausrüstung gefunden!</string>
+    <string name="quest_weekly_complete">Wochenchallenge abgeschlossen! +%1$s Münzen</string>
+    <string name="quest_weekly_bonus_complete_coins">Alle Wochenchallenges abgeschlossen! +%1$s Münzen</string>
+    <string name="quest_weekly_bonus_complete_divine">Alle Wochenchallenges abgeschlossen! Du hast göttliche Ausrüstung gefunden!</string>
+    <string name="guild_contributed_items">%1$d Gegenstände beigetragen.</string>
+    <string name="mercantile_not_enough_coins">Nicht genug Münzen (benötigt %1$s Münzen).</string>
+    <string name="mercantile_route_start_failed">Route konnte nicht gestartet werden: %1$s</string>
+    <string name="mercantile_added_to_queue">Zur Warteschlange hinzugefügt: Handelsvaardig — %1$s.</string>
+    <string name="inventory_requires_to_equip">Zum Ausrüsten wird %1$s benötigt.</string>
+    <string name="home_found_pet">Du hast ein Haustier gefunden: %1$s!</string>
+    <string name="home_congratulations_received">Glückwunsch! Du hast erhalten: %1$s</string>
+    <string name="combat_no_food_title">Keine Nahrung ausgerüstet</string>
+    <string name="combat_no_food_body">Du hast keine Nahrung ausgerüstet. Ohne Nahrung kannst du schnell sterben und die meisten Belohnungen verlieren. Trotzdem starten?</string>
+    <string name="combat_start_anyway">Trotzdem starten</string>
+    <string name="combat_xp_consolation">EP (Trost)</string>
+    <string name="bestiary_loot_item_header">Gegenstand</string>
+    <string name="worker_no_mats">Keine Mat.</string>
+
+    <!-- Boss Descriptions -->
+    <string name="boss_king_black_dragon_desc">Der legendäre dreiköpfige Drache, gefürchtet im ganzen Reich.</string>
+    <string name="boss_demon_lord_desc">Ein uralter Dämon aus dem Abgrund, Meister der dunklen Magie.</string>
+    <string name="boss_kraken_desc">Der Schrecken der Tiefsee, ein kolossales Seeungeheuer.</string>
+    <string name="boss_balrog_desc">Ein uralter Dämon aus Flamme und Schatten, erwacht aus seinem Schlaf tief unter der Erde.</string>
+    <string name="boss_void_sovereign_desc">Die ursprüngliche Entität hinter den Leerenrissen. Unermesslich alt, betrachtet sie sterbliche Herausforderer mit Verachtung.</string>
 </resources>

@@ -1,7 +1,9 @@
 package com.fantasyidler.ui.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fantasyidler.R
 import com.fantasyidler.data.json.BossData
 import com.fantasyidler.data.json.DungeonData
 import com.fantasyidler.data.json.EnemyData
@@ -25,6 +27,7 @@ import com.fantasyidler.repository.SlayerRepository
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.SkillSimulator
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -97,6 +100,7 @@ data class CombatUiState(
 
 @HiltViewModel
 class CombatViewModel @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val playerRepo: PlayerRepository,
     private val sessionRepo: SessionRepository,
     private val gameData: GameDataRepository,
@@ -145,11 +149,29 @@ class CombatViewModel @Inject constructor(
             val equippedWeapons = EquipSlot.WEAPON_SLOTS
                 .mapNotNull { slot -> equipped[slot]?.let { key -> gameData.equipment[key]?.let { slot to it } } }
                 .toMap()
-            val armorAtk = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.attackBonus  ?: 0 }
-            val armorStr = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.strengthBonus ?: 0 }
+            val displayStyle = equippedWeapon?.combatStyle ?: "melee"
+            val armorAtk = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
+                val eq = gameData.equipment[equipped[slot]] ?: return@sumOf 0
+                eq.attackBonus + when (displayStyle) {
+                    "ranged" -> eq.rangedAttackBonus ?: 0
+                    "magic"  -> eq.magicAttackBonus  ?: 0
+                    else     -> 0
+                }
+            }
+            val armorStr = when (displayStyle) {
+                "ranged" -> EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.rangedStrengthBonus ?: 0 }
+                else     -> EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.strengthBonus ?: 0 }
+            }
             val armorDef = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[equipped[it]]?.defenseBonus  ?: 0 }
-            val totalAtk = armorAtk + (equippedWeapon?.attackBonus  ?: 0)
-            val totalStr = armorStr + (equippedWeapon?.strengthBonus ?: 0)
+            val totalAtk = armorAtk + (equippedWeapon?.attackBonus ?: 0) + when (displayStyle) {
+                "ranged" -> equippedWeapon?.rangedAttackBonus ?: 0
+                "magic"  -> equippedWeapon?.magicAttackBonus  ?: 0
+                else     -> 0
+            }
+            val totalStr = armorStr + when (displayStyle) {
+                "ranged" -> equippedWeapon?.rangedStrengthBonus ?: 0
+                else     -> equippedWeapon?.strengthBonus ?: 0
+            }
             val totalDef = armorDef + (equippedWeapon?.defenseBonus  ?: 0)
             val defenceLevel  = levels[Skills.DEFENSE]   ?: 1
             val hpLevel       = levels[Skills.HITPOINTS] ?: 1
@@ -235,11 +257,23 @@ class CombatViewModel @Inject constructor(
     fun selectBoss(boss: BossData?) =
         _extra.update { it.copy(selectedBoss = boss) }
 
-    fun selectWeaponSlot(slot: String) =
+    fun selectWeaponSlot(slot: String) {
         _extra.update { it.copy(selectedWeaponSlot = slot) }
+        viewModelScope.launch {
+            val player = playerRepo.getOrCreatePlayer()
+            val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            playerRepo.updateFlags(flags.copy(activeWeaponSlot = slot))
+        }
+    }
 
-    fun selectSpell(spell: SpellData?) =
+    fun selectSpell(spell: SpellData?) {
         _extra.update { it.copy(selectedSpell = spell) }
+        viewModelScope.launch {
+            val player = playerRepo.getOrCreatePlayer()
+            val flags: PlayerFlags = try { json.decodeFromString(player.flags) } catch (_: Exception) { PlayerFlags() }
+            playerRepo.updateFlags(flags.copy(activeSpell = spell?.name))
+        }
+    }
 
     fun selectArrow(key: String?) {
         _extra.update { it.copy(selectedArrowKey = key) }
@@ -298,10 +332,8 @@ class CombatViewModel @Inject constructor(
                 )
                 _extra.update {
                     it.copy(
-                        snackbarMessage    = if (enqueued) "Added to queue: $dungeonName." else "Queue is full (3/3).",
+                        snackbarMessage    = if (enqueued) context.getString(R.string.snackbar_added_to_queue, dungeonName) else context.getString(R.string.snackbar_queue_full),
                         selectedDungeon    = null,
-                        selectedWeaponSlot = null,
-                        selectedSpell      = null,
                         selectedArrowKey   = null,
                         selectedPotionKey  = null,
                     )
@@ -370,7 +402,7 @@ class CombatViewModel @Inject constructor(
                 if (combatStyle == "magic") {
                     if (selectedSpell == null) {
                         _extra.update {
-                            it.copy(snackbarMessage = "Select a spell before entering.", startingSession = false)
+                            it.copy(snackbarMessage = context.getString(R.string.combat_select_spell), startingSession = false)
                         }
                         return@launch
                     }
@@ -378,7 +410,7 @@ class CombatViewModel @Inject constructor(
                     if (magicLevel < selectedSpell.magicLevelRequired) {
                         _extra.update {
                             it.copy(
-                                snackbarMessage = "Need Magic ${selectedSpell.magicLevelRequired} for ${selectedSpell.displayName}.",
+                                snackbarMessage = context.getString(R.string.combat_spell_level_required, selectedSpell.magicLevelRequired, selectedSpell.displayName),
                                 startingSession = false,
                             )
                         }
@@ -464,9 +496,9 @@ class CombatViewModel @Inject constructor(
                     alarmOffsetMs    = alarmOffsetMs,
                 )
             } catch (e: Exception) {
-                _extra.update { it.copy(snackbarMessage = "Failed to start session: ${e.message}") }
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.skill_session_start_failed, e.message ?: "")) }
             } finally {
-                _extra.update { it.copy(startingSession = false, selectedPotionKey = null, selectedWeaponSlot = null) }
+                _extra.update { it.copy(startingSession = false, selectedPotionKey = null) }
             }
         }
     }
@@ -499,10 +531,8 @@ class CombatViewModel @Inject constructor(
                 )
                 _extra.update {
                     it.copy(
-                        snackbarMessage    = if (enqueued) "Added to queue: $bossName." else "Queue is full (3/3).",
+                        snackbarMessage    = if (enqueued) context.getString(R.string.snackbar_added_to_queue, bossName) else context.getString(R.string.snackbar_queue_full),
                         selectedBoss       = null,
-                        selectedWeaponSlot = null,
-                        selectedSpell      = null,
                         selectedArrowKey   = null,
                         selectedPotionKey  = null,
                     )
@@ -631,7 +661,7 @@ class CombatViewModel @Inject constructor(
                     } else null,
                 )
             } catch (e: Exception) {
-                _extra.update { it.copy(snackbarMessage = "Could not start boss fight: ${e.message}") }
+                _extra.update { it.copy(snackbarMessage = context.getString(R.string.combat_start_failed, e.message ?: "")) }
             } finally {
                 _extra.update { it.copy(startingSession = false, selectedPotionKey = null) }
             }
@@ -704,12 +734,13 @@ class CombatViewModel @Inject constructor(
             )
             playerRepo.recordDailyKills(mapOf(session.activityKey to 1))
             playerRepo.recordWeeklyProgress("boss", session.activityKey, 1)
-            guildRepo.recordGuildCombat(mapOf(session.activityKey to 1), detectCombatStyle(last.xpBySkill))
+            guildRepo.recordGuildCombat(mapOf(session.activityKey to 1), last.combatStyle.ifEmpty { "melee" })
         }
-        val xpDisplayBySkill = last.xpBySkill.mapValues { (_, xp) -> xp * boostMult }
-        val xpBlessingBonusBySkill = xpDisplayBySkill
-            .mapValues { (_, xp) -> (xp.toDouble() * (blessingXpMult - 1)).toLong() }
-            .filter { (_, bonus) -> bonus > 0 }
+        val xpDisplayBySkill = last.xpBySkill.mapValues { (_, xp) -> (xp * boostMult * blessingXpMult).toLong() }
+        val xpBlessingBonusBySkill = last.xpBySkill.mapValues { (_, xp) ->
+            val boosted = xp * boostMult
+            ((boosted.toDouble() * blessingXpMult).toLong() - boosted).coerceAtLeast(0L)
+        }.filter { (_, bonus) -> bonus > 0 }
         val coinBlessingBonus = (coinsGained.toDouble() * (blessingCoinMult - 1)).toLong()
         val itemsDisplay = last.items.toMutableMap().also { it.remove("coins") }
         sessionRepo.deleteSession(session.sessionId)
@@ -774,14 +805,12 @@ class CombatViewModel @Inject constructor(
         }
         val dungeon = gameData.dungeons[session.activityKey]
 
-        // Accumulate Slayer XP for kills that match the active task (skipped on death)
-        if (!playerDied) {
-            var slayerXp = 0L
-            for ((enemy, kills) in allKillsByEnemy) {
-                slayerXp += slayerRepo.recordKills(enemy, kills)
-            }
-            if (slayerXp > 0L) totalXpPerSkill[Skills.SLAYER] = (totalXpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
+        // Accumulate Slayer XP for kills that match the active task
+        var slayerXp = 0L
+        for ((enemy, kills) in allKillsByEnemy) {
+            slayerXp += slayerRepo.recordKills(enemy, kills)
         }
+        if (slayerXp > 0L) totalXpPerSkill[Skills.SLAYER] = (totalXpPerSkill[Skills.SLAYER] ?: 0L) + slayerXp
 
         val dungeonFlags      = playerRepo.getFlags()
         val blessingXpMult    = ChurchRepository.xpMultiplier(dungeonFlags)
@@ -813,10 +842,11 @@ class CombatViewModel @Inject constructor(
             }
             playerRepo.incrementDungeonRun(session.activityKey)
         }
-        val xpDisplayBySkill = totalXpPerSkill.mapValues { (_, xp) -> xp * boostMult }
-        val xpBlessingBonusBySkill = xpDisplayBySkill
-            .mapValues { (_, xp) -> (xp.toDouble() * (blessingXpMult - 1)).toLong() }
-            .filter { (_, bonus) -> bonus > 0 }
+        val xpDisplayBySkill = totalXpPerSkill.mapValues { (_, xp) -> (xp * boostMult * blessingXpMult).toLong() }
+        val xpBlessingBonusBySkill = totalXpPerSkill.mapValues { (_, xp) ->
+            val boosted = xp * boostMult
+            ((boosted.toDouble() * blessingXpMult).toLong() - boosted).coerceAtLeast(0L)
+        }.filter { (_, bonus) -> bonus > 0 }
         val coinBlessingBonus = (coinsGained.toDouble() * (blessingCoinMult - 1)).toLong()
         sessionRepo.deleteSession(session.sessionId)
         val dungeonRecentFlags = playerRepo.getFlags()
@@ -919,7 +949,7 @@ class CombatViewModel @Inject constructor(
     private fun buildCapeMessage(capes: List<String>): String? {
         if (capes.isEmpty()) return null
         val names = capes.joinToString(", ") { gameData.itemDisplayName(it) }
-        return "Congratulations! You received: $names"
+        return context.getString(R.string.home_congratulations_received, names)
     }
 
     // ------------------------------------------------------------------
@@ -994,7 +1024,7 @@ class CombatViewModel @Inject constructor(
             json.decodeFromString<List<OwnedPet>>(petsJson)
         } catch (_: Exception) { return 0 }
         val petId = pets.firstOrNull { pet ->
-            gameData.pets[pet.id]?.boostedSkill in Skills.COMBAT
+            gameData.pets[pet.id]?.boostedSkill in Skills.COMBAT || gameData.pets[pet.id]?.boostedSkill == "all"
         } ?: return 0
         return gameData.pets[petId.id]?.boostPercent ?: 0
     }

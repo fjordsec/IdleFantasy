@@ -7,6 +7,7 @@ import com.fantasyidler.data.model.PlayerFlags
 import com.fantasyidler.data.model.QueuedAction
 import com.fantasyidler.data.model.SessionFrame
 import com.fantasyidler.data.model.Skills
+import com.fantasyidler.simulator.CarnivalSimulator
 import com.fantasyidler.simulator.CombatSimulator
 import com.fantasyidler.simulator.MercantileSimulator
 import com.fantasyidler.simulator.SkillingDungeonSimulator
@@ -396,12 +397,15 @@ class QueuedSessionStarter @Inject constructor(
                 val totalAtkBonus    = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
                     val eq = gameData.equipment[bossEquipped[slot]]
                     when (combatStyle) { "ranged" -> eq?.rangedAttackBonus ?: 0; "magic" -> eq?.magicAttackBonus ?: 0; else -> eq?.attackBonus ?: 0 }
-                } + when (combatStyle) { "ranged" -> bossWeapon?.rangedAttackBonus ?: 0; "magic" -> bossWeapon?.magicAttackBonus ?: 0; else -> bossWeapon?.attackBonus ?: 0 }
+                } + when (combatStyle) { "ranged" -> bossWeapon?.rangedAttackBonus ?: bossWeapon?.attackBonus ?: 0; "magic" -> bossWeapon?.magicAttackBonus ?: 0; else -> bossWeapon?.attackBonus ?: 0 }
                 val totalStrBonus    = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[bossEquipped[it]]?.strengthBonus ?: 0 } + (bossWeapon?.strengthBonus ?: 0)
                 val totalDefBonus    = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[bossEquipped[it]]?.defenseBonus  ?: 0 } + (bossWeapon?.defenseBonus  ?: 0)
                 val totalMagicDmgBonus = if (combatStyle == "magic") EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[bossEquipped[it]]?.magicDamageBonus ?: 0 } + (bossWeapon?.magicDamageBonus ?: 0) else 0
-                val equippedFoodKeys = flags.equippedFood.keys
-                val availableFood    = inventory.filterKeys { it in equippedFoodKeys }
+                val equippedFoodKeys  = flags.equippedFood.keys
+                val prevFoodConsumed  = pendingFoodConsumed()
+                val availableFood     = inventory.filterKeys { it in equippedFoodKeys }
+                    .mapValues { (k, v) -> (v - (prevFoodConsumed[k] ?: 0)).coerceAtLeast(0) }
+                    .filterValues { it > 0 }
                 val spell = gameData.spells[bossSpellName]
                 val preferredArrow = bossArrowKey?.takeIf { (inventory[it] ?: 0) > 0 }
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
@@ -490,13 +494,16 @@ class QueuedSessionStarter @Inject constructor(
                 val bestArrow = preferredArrow ?: ARROW_TIERS.firstOrNull { (inventory[it] ?: 0) > 0 }
                 val arrowBonus = bestArrow?.let { ARROW_STRENGTH_BONUS[it] } ?: 0
                 val availableArrows = if (bestArrow != null) mapOf(bestArrow to (inventory[bestArrow] ?: 0)) else emptyMap()
-                val equippedFoodKeys = flags.equippedFood.keys
-                val availableFood    = inventory.filterKeys { it in equippedFoodKeys }
+                val equippedFoodKeys  = flags.equippedFood.keys
+                val prevFoodConsumed  = pendingFoodConsumed()
+                val availableFood     = inventory.filterKeys { it in equippedFoodKeys }
+                    .mapValues { (k, v) -> (v - (prevFoodConsumed[k] ?: 0)).coerceAtLeast(0) }
+                    .filterValues { it > 0 }
                 val spell = gameData.spells[combatSpellName]
                 val totalAtkBonus = EquipSlot.ARMOR_SLOTS.sumOf { slot ->
                     val eq = gameData.equipment[combatEquipped[slot]]
                     when (combatStyle) { "ranged" -> eq?.rangedAttackBonus ?: 0; "magic" -> eq?.magicAttackBonus ?: 0; else -> eq?.attackBonus ?: 0 }
-                } + when (combatStyle) { "ranged" -> weapon?.rangedAttackBonus ?: 0; "magic" -> weapon?.magicAttackBonus ?: 0; else -> weapon?.attackBonus ?: 0 }
+                } + when (combatStyle) { "ranged" -> weapon?.rangedAttackBonus ?: weapon?.attackBonus ?: 0; "magic" -> weapon?.magicAttackBonus ?: 0; else -> weapon?.attackBonus ?: 0 }
                 val totalStrBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[combatEquipped[it]]?.strengthBonus ?: 0 } + (weapon?.strengthBonus ?: 0)
                 val totalDefBonus = EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[combatEquipped[it]]?.defenseBonus  ?: 0 } + (weapon?.defenseBonus  ?: 0)
                 val totalMagicDmgBonus = if (combatStyle == "magic") EquipSlot.ARMOR_SLOTS.sumOf { gameData.equipment[combatEquipped[it]]?.magicDamageBonus ?: 0 } + (weapon?.magicDamageBonus ?: 0) else 0
@@ -530,6 +537,22 @@ class QueuedSessionStarter @Inject constructor(
                 }
                 startSession(action, result, offline, backdateMs)
             }
+            "carnival" -> {
+                val relevantSkillLevel = when (action.activityKey) {
+                    "archery_range"         -> levels[Skills.RANGED]   ?: 1
+                    "strongman_competition" -> levels[Skills.STRENGTH] ?: 1
+                    "wizards_duel"          -> levels[Skills.MAGIC]    ?: 1
+                    "fishing_derby"         -> levels[Skills.FISHING]  ?: 1
+                    else                    -> 1
+                }
+                val result = CarnivalSimulator.simulate(
+                    activityKey        = action.activityKey,
+                    relevantSkillLevel = relevantSkillLevel,
+                    petBoostPct        = gatheringPetBoost(player.pets, CarnivalSimulator.relevantSkill(action.activityKey)),
+                    agilityLevel       = agilityLevel,
+                )
+                startSession(action, result, offline, backdateMs)
+            }
         }
     }
 
@@ -548,15 +571,29 @@ class QueuedSessionStarter @Inject constructor(
     private fun encodeFrames(frames: List<SessionFrame>): String =
         json.encodeToString(json.serializersModule.serializer<List<SessionFrame>>(), frames)
 
+    /**
+     * Returns the total food consumed by the most recent player session if it is
+     * completed but not yet collected (food not yet deducted from inventory).
+     * Used so the next queued combat session doesn't get the full pre-battle food supply.
+     */
+    private suspend fun pendingFoodConsumed(): Map<String, Int> {
+        val session = sessionRepo.getActiveSession() ?: return emptyMap()
+        if (!session.completed || session.skillName !in listOf("combat", "boss")) return emptyMap()
+        val frames = try { json.decodeFromString<List<SessionFrame>>(session.frames) } catch (_: Exception) { return emptyMap() }
+        val result = mutableMapOf<String, Int>()
+        for (frame in frames) frame.foodConsumed.forEach { (k, v) -> result[k] = (result[k] ?: 0) + v }
+        return result
+    }
+
     private fun gatheringPetBoost(petsJson: String, skillKey: String): Int {
         val pets = try { json.decodeFromString<List<OwnedPet>>(petsJson) } catch (_: Exception) { return 0 }
-        val id   = pets.firstOrNull { gameData.pets[it.id]?.boostedSkill == skillKey } ?: return 0
+        val id   = pets.firstOrNull { gameData.pets[it.id]?.boostedSkill == skillKey || gameData.pets[it.id]?.boostedSkill == "all" } ?: return 0
         return gameData.pets[id.id]?.boostPercent ?: 0
     }
 
     private fun combatPetBoost(petsJson: String): Int {
         val pets = try { json.decodeFromString<List<OwnedPet>>(petsJson) } catch (_: Exception) { return 0 }
-        val id   = pets.firstOrNull { gameData.pets[it.id]?.boostedSkill in Skills.COMBAT } ?: return 0
+        val id   = pets.firstOrNull { gameData.pets[it.id]?.boostedSkill in Skills.COMBAT || gameData.pets[it.id]?.boostedSkill == "all" } ?: return 0
         return gameData.pets[id.id]?.boostPercent ?: 0
     }
 

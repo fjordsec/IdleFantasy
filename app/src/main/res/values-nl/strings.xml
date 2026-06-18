@@ -37,6 +37,7 @@
     <string name="btn_enter_dungeon">Dungeon Betreden</string>
     <string name="btn_enter_arena">Arena Betreden</string>
     <string name="btn_activate">Activeren</string>
+    <string name="btn_extend">Verlengen</string>
     <string name="btn_deactivate">Deactiveren</string>
     <string name="btn_close">Sluiten</string>
     <string name="btn_back">Terug</string>
@@ -388,7 +389,7 @@
 
     <!-- ===== HomeScreen ===== -->
     <string name="home_town_title">Dorp</string>
-    <string name="home_town_desc">Bezoek de winkel, herberg, gilde, kerk, bouwersatelier, de slagersmeester en de speelhoek</string>
+    <string name="home_town_desc">Bezoek de winkel, herberg, gilde, kerk, bouwersatelier, de slagersmeester en de kermis</string>
     <string name="guild_dailies_available">Dagelijkse opdrachten beschikbaar</string>
     <string name="guild_do_dailies_hint">Doe dagelijkse opdrachten om je reputatie te verhogen</string>
     <string name="home_died_message">Je bent dood en hebt het grootste deel van je voortgang verloren.</string>
@@ -568,6 +569,10 @@
     <string name="crafting_needed_have">%1$d (je hebt %2$d)</string>
     <!-- Translator note: %1$d = quantity in inventory -->
     <string name="crafting_in_inventory">In inventaris: ×%1$d</string>
+    <string name="crafting_quest_targets">Questdoelen</string>
+    <string name="quest_fill_daily">Dagelijks</string>
+    <string name="quest_fill_weekly">Wekelijks</string>
+    <string name="quest_fill_guild">Gilde</string>
 
     <!-- ===== FarmingScreen ===== -->
     <!-- Translator note: %1$s = crop name -->
@@ -657,7 +662,7 @@
     <string name="worker_apprentice">Leerling</string>
     <string name="worker_journeyman">Vakman</string>
     <string name="worker_master">Meester</string>
-    <string name="inn_long_laborer_desc">8u verzamelen, 0,5x efficiëntie. Geen limiet op Juwelier, Gebed of Runen limiet. Zet zoveel in de wachtrij als je wilt. Hij is traag, maar hij doet alles.</string>
+    <string name="inn_long_laborer_desc">Één klus per inhuur, ontslagen na het ophalen. 8u verzamelen, 0,5x efficiëntie, onbeperkte ambachtshoeveelheid. Hij is traag, maar hij doet alles.</string>
     <string name="inn_apprentice_desc">8u verzamelen, 1x efficiëntie. Juwelier, Gebed en Runen maken beperkt tot 480 items per sessie.</string>
     <string name="inn_journeyman_desc">6u verzamelen, 1,25x efficiëntie. Juwelier, Gebed en Runen maken beperkt tot 360 items per sessie.</string>
     <string name="inn_master_desc">4u verzamelen, 2x efficiëntie. Juwelier, Gebed en Runen maken beperkt tot 240 items per sessie.</string>
@@ -714,8 +719,10 @@
     <string name="achievement_combat_50_desc">Bereik gevechtslevel 50</string>
     <string name="achievement_combat_75_name">Elite</string>
     <string name="achievement_combat_75_desc">Bereik gevechtslevel 75</string>
-    <string name="achievement_combat_99_name">Oorlogsgod</string>
+    <string name="achievement_combat_99_name">Champion</string>
     <string name="achievement_combat_99_desc">Bereik gevechtslevel 99</string>
+    <string name="achievement_combat_113_name">Oorlogsgod</string>
+    <string name="achievement_combat_113_desc">Bereik het maximale gevechtslevel van 113</string>
 
     <string name="achievement_quest_1_name">Quester</string>
     <string name="achievement_quest_1_desc">Doe 1 quest</string>
@@ -1101,4 +1108,219 @@
     <string name="item_amulet_of_the_void_name">Amulet van de Leegte</string>
     <string name="item_amulet_of_the_void_desc">Een hanger van pure leegte-essentie. Verbetert alle gevechtsstatistieken van de drager.</string>
 
+
+    <!-- ===== Carnival ===== -->
+    <string name="carnival_title">Kermis</string>
+    <string name="carnival_desc">Spelen, prijzen en feestpret!</string>
+    <string name="carnival_ticket_balance">Loten: %1$d</string>
+    <string name="carnival_idle_tab">Wachtrijspellen</string>
+    <string name="carnival_active_tab">Actieve spellen</string>
+    <string name="carnival_shop_tab">Prijzenwinkel</string>
+    <string name="carnival_idle_hint">Voeg een sessie toe aan de wachtrij om loten te verdienen. Een hoger vaardigheidsniveau betekent meer loten.</string>
+    <string name="carnival_archery_range">Boogschieten</string>
+    <string name="carnival_idle_desc_archery">Schiet op bewegende doelen. Afstand niveau verhoogt de opbrengst.</string>
+    <string name="carnival_strongman_competition">Sterkste man wedstrijd</string>
+    <string name="carnival_idle_desc_strongman">Til stenen op en zwaai hamers. Kracht niveau verhoogt de opbrengst.</string>
+    <string name="carnival_wizards_duel">Tovenaarsduel</string>
+    <string name="carnival_idle_desc_wizard">Werp illusie spreuken tegen rivaliserende magiërs. Magie niveau verhoogt de opbrengst.</string>
+    <string name="carnival_fishing_derby">Viswedstrijd</string>
+    <string name="carnival_idle_desc_fishing">Vang de grootste vis in de kermis vijver. Vissen niveau verhoogt de opbrengst.</string>
+    <string name="carnival_skill_level">%1$s Nv.%2$d</string>
+    <string name="carnival_ticket_yield">~%1$d loten/sessie</string>
+    <string name="carnival_queue">Sessie in wachtrij</string>
+    <string name="carnival_ring_toss">Ringwerpen</string>
+    <string name="carnival_active_ring_desc">Gooi wanneer de indicator de gouden doelzone bereikt.</string>
+    <string name="carnival_ring_target_hint">Mik op het midden (45%%–55%%)</string>
+    <string name="carnival_throw">Gooi!</string>
+    <string name="carnival_hammer_strike">Hamerstoot</string>
+    <string name="carnival_active_hammer_desc">Sla toe wanneer de krachtmeter op zijn hoogtepunt is.</string>
+    <string name="carnival_power_label">Krachtmeter</string>
+    <string name="carnival_hammer_miss_zone">Mis</string>
+    <string name="carnival_hammer_good_zone">Goed</string>
+    <string name="carnival_hammer_perfect_zone">Perfecte!</string>
+    <string name="carnival_strike">Sla!</string>
+    <string name="carnival_potion_sequence">Drankenvolgorde</string>
+    <string name="carnival_active_sequence_desc">Let op de drankenkleuren en tik ze in dezelfde volgorde.</string>
+    <string name="carnival_sequence_watch">Let op de volgorde…</string>
+    <string name="carnival_sequence_input">Tik kleur %1$d van %2$d</string>
+    <string name="carnival_item_appraisal">Waardebepaling</string>
+    <string name="carnival_active_appraisal_desc">Welk item is meer waard op de open markt?</string>
+    <string name="carnival_appraisal_which">Welke is meer waard?</string>
+    <string name="carnival_play">Spelen</string>
+    <string name="carnival_cooldown">Klaar in %1$dh %2$dm</string>
+    <string name="carnival_ticket_cost">%1$d loten</string>
+    <string name="carnival_redeem">Inwisselen</string>
+    <string name="carnival_queue_added">Toegevoegd aan wachtrij: %1$s.</string>
+    <string name="carnival_queue_full">Wachtrij is vol (3/3).</string>
+    <string name="carnival_ring_won">Raak! +%1$d loten</string>
+    <string name="carnival_ring_missed">Doel gemist!</string>
+    <string name="carnival_hammer_perfect">Perfecte slag! +%1$d loten</string>
+    <string name="carnival_hammer_good">Goede slag! +%1$d loten</string>
+    <string name="carnival_hammer_miss">Slag gemist!</string>
+    <string name="carnival_sequence_correct">Volgorde correct! +%1$d loten</string>
+    <string name="carnival_sequence_wrong">Verkeerde volgorde! Probeer opnieuw.</string>
+    <string name="carnival_appraisal_correct">Correct! +%1$d loten</string>
+    <string name="carnival_appraisal_wrong">Fout! Het meest waardevolle item was %1$s.</string>
+    <string name="carnival_redeemed">Ingewisseld: %1$s!</string>
+    <string name="carnival_not_enough_tickets">Niet genoeg loten.</string>
+    <string name="carnival_lamp_redeemed">+%1$d XP in %2$s!</string>
+
+    <!-- ===== Magic Bean / Farming ===== -->
+    <string name="farming_bean_note_1">Een klein spruitje heeft door de grond geduwd.</string>
+    <string name="farming_bean_note_2">De stengel groeit op een bovennatuurlijke manier.</string>
+    <string name="farming_bean_note_3">De bladeren zijn enorm — zoals je nog nooit hebt gezien.</string>
+    <string name="farming_bean_note_4">Wolken zijn begonnen zich rond de bovenste stengel te verzamelen...</string>
+    <string name="farming_bean_note_5">Vreemde geluiden driften neer van ergens ver boven.</string>
+    <string name="farming_bean_note_6">Ver gerommel. Iets roert in de hoogten.</string>
+    <string name="farming_bean_note_7">De bonenrank trilt. Iets wacht aan de top.</string>
+    <string name="farming_bean_note_8">Bijna daar. De lucht wordt dunner. Je kunt de top bijna zien.</string>
+    <string name="farming_bean_ready">De bonenrank reikt tot voorbij de wolken. Klaar om te klimmen?</string>
+    <string name="farming_bean_climb">Klimmen</string>
+    <string name="farming_bean_climbed">Je hebt de bonenrank beklommen. Iets wacht je...</string>
+    <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
+    <string name="farming_magic_bean_one_plot">Magische bonen kunnen slechts op één veld worden geplant</string>
+
+    <!-- ===== Armory Tab ===== -->
+    <string name="armory_tab">Arsenaal</string>
+    <string name="tab_bonuses">Bonussen</string>
+    <string name="bonus_none">Geen actieve XP-bonussen</string>
+    <string name="bonus_all_skills">Alle vaardigheden</string>
+    <string name="bonus_section_boosts">Actieve bonussen</string>
+    <string name="bonus_section_skills">Skill Bonuses</string>
+    <string name="bonus_combat_stat_boost">Boosts combat stats</string>
+    <string name="snackbar_added_to_queue">Toegevoegd aan wachtrij: %1$s.</string>
+    <string name="snackbar_queue_full">Wachtrij is vol (3/3).</string>
+    <string name="home_not_enough_coins_repeat">Niet genoeg munten om %1$s te herhalen.</string>
+    <string name="home_not_enough_materials_repeat">Niet genoeg materialen om %1$s te herhalen.</string>
+    <string name="combat_start_failed">Kon niet starten: %1$s</string>
+    <string name="combat_select_spell">Select a spell before entering.</string>
+    <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
+    <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
+    <string name="armory_not_owned">Je bezit dit item niet.</string>
+    <string name="armory_how_to_obtain">Hoe te verkrijgen</string>
+    <string name="armory_no_stats">Geen statbonussen.</string>
+    <string name="armory_filter_all">Alles</string>
+    <string name="armory_filter_weapons">Wapens</string>
+    <string name="armory_filter_armor">Pantser</string>
+    <string name="armory_filter_accessories">Accessoires</string>
+    <string name="armory_filter_tools">Gereedschap</string>
+
+    <!-- ===== Combat arrows ===== -->
+    <string name="combat_arrow_auto">Automatisch (beste beschikbare)</string>
+    <string name="combat_label_arrow">Pijl</string>
+
+    <!-- ===== Guild ===== -->
+    <string name="guild_quest_gate_blocked">Voltooi quests om je rang te verhogen</string>
+    <string name="guild_quest_required">Quest vereist om te vorderen</string>
+
+    <!-- ===== Home screen ===== -->
+    <string name="home_xp_boost_active">2× XP-boost actief — nog %1$s</string>
+
+    <!-- ===== Inn ===== -->
+    <string name="inn_buy_qty">Hoeveelheid</string>
+    <string name="inn_buy_total">Totaal: %1$s</string>
+    <string name="inn_slot1_header">Lange Arbeider</string>
+    <string name="inn_slot2_header">Geschoolde Arbeider</string>
+
+    <!-- ===== Slayer items ===== -->
+    <string name="item_abyssal_whip_name">Abyssale Zweep</string>
+    <string name="item_abyssal_whip_desc">Een zweep gesmeed uit abyssale energie. Uitstekend voor krachttraining.</string>
+    <string name="item_slayer_helm_name">Slayer Helm</string>
+    <string name="item_slayer_helm_desc">Een stevige helm gedragen door veteraan-slayers.</string>
+    <string name="item_slayer_platebody_name">Slayer Platenromp</string>
+    <string name="item_slayer_platebody_desc">Zwaar pantser gegraveerd met slayer-runen.</string>
+    <string name="item_slayer_platelegs_name">Slayer Beenplaten</string>
+    <string name="item_slayer_platelegs_desc">Beschermende beenplaten gemaakt voor lange kerker-tochten.</string>
+
+    <!-- ===== Profile ===== -->
+    <string name="profile_view_combat_gear">Gevechtsuitrusting Bekijken</string>
+
+    <!-- ===== Settings changelog ===== -->
+    <string name="settings_changelog_title">Wat is er nieuw</string>
+    <string name="settings_changelog_desc">Bekijk de laatste wijzigingen</string>
+    <string name="settings_changelog_btn">Bekijken</string>
+
+    <!-- ===== Slayer ===== -->
+    <string name="skill_slayer_name">Slayer</string>
+    <string name="skill_slayer_desc">Ontvang taken van de Slayer Meester in de Stad.</string>
+    <string name="slayer_title">Slayer Meester</string>
+    <string name="slayer_card_desc">Taken en beloningen voor slayers</string>
+    <string name="slayer_desc">Voltooi taken voor Slayer XP en punten. Besteed punten in de winkel voor exclusieve uitrusting.</string>
+    <string name="slayer_active_task">Actieve Taak</string>
+    <string name="slayer_no_task">Geen actieve taak. Tik op Nieuwe Taak Ophalen.</string>
+    <string name="slayer_get_task">Nieuwe Taak Ophalen</string>
+    <string name="slayer_skip_task">Overslaan (30 pts)</string>
+    <string name="slayer_reroll_free">Hergooi (gratis)</string>
+    <string name="slayer_kills_remaining">%1$d / %2$d kills</string>
+    <string name="slayer_task_complete">Taak voltooid! Bezoek de Slayer Meester voor een nieuwe.</string>
+    <string name="slayer_task_stuck">Deze vijand is alleen te vinden in een Expeditie-kerker die je nog niet hebt ontdekt. Hergooi gratis.</string>
+    <string name="slayer_no_eligible_tasks">Geen beschikbare taken op jouw Slayer-niveau.</string>
+    <string name="slayer_level_label">Niveau %1$d</string>
+    <string name="slayer_xp_label">%1$s XP</string>
+    <string name="slayer_xp_per_kill">%1$d XP/kill</string>
+    <string name="slayer_found_in">Gevonden in: %1$s</string>
+    <string name="slayer_requires">Vereist: %1$s</string>
+    <string name="slayer_points">%1$d pts</string>
+    <string name="slayer_points_on_complete">+%1$d pts bij voltooiing</string>
+    <string name="slayer_shop_title">Slayer Winkel</string>
+    <string name="slayer_shop_cost">%1$d pts</string>
+    <string name="slayer_not_enough_points">Niet genoeg Slayer-punten.</string>
+    <string name="slayer_owned">In bezit</string>
+    <string name="slayer_already_owned">Al in bezit.</string>
+    <string name="slayer_purchased">Toegevoegd aan inventaris.</string>
+    <string name="slayer_lamp_small">XP Lamp (Klein)</string>
+    <string name="slayer_lamp_small_desc">+10.000 XP aan elke vaardigheid</string>
+    <string name="slayer_lamp_large">XP Lamp (Groot)</string>
+    <string name="slayer_lamp_large_desc">+50.000 XP aan elke vaardigheid</string>
+    <string name="slayer_lamp_pick_skill">Kies een vaardigheid</string>
+    <string name="slayer_lamp_purchased">XP toegevoegd aan %1$s!</string>
+
+    <!-- Session / queue messages (issue #596) -->
+    <string name="skill_no_logs">Geen stammen in inventaris</string>
+    <string name="skill_not_enough_rune_essence">Niet genoeg Runenessence</string>
+    <string name="skill_not_enough_item">Niet genoeg %1$s</string>
+    <string name="skill_not_enough_materials">Niet genoeg materialen</string>
+    <string name="skill_session_start_failed">Sessie starten mislukt: %1$s</string>
+    <string name="skill_added_to_queue_activity">Toegevoegd aan wachtrij: %1$s — %2$s.</string>
+    <string name="worker_already_busy">De arbeider is al bezig.</string>
+    <string name="worker_not_enough_logs">Niet genoeg stammen.</string>
+    <string name="worker_not_enough_rune_essence">Niet genoeg Runenessence.</string>
+    <string name="worker_not_enough_materials">Niet genoeg materialen.</string>
+    <string name="shop_no_junk">Geen rommel te verkopen</string>
+    <string name="shop_sold_junk">Rommel verkocht voor %1$s munten</string>
+    <string name="shop_no_old_equipment">Geen oud uitrusting te verkopen</string>
+    <string name="shop_sold_old_equipment">Oud uitrusting verkocht voor %1$s munten</string>
+    <string name="shop_bulk_sell_total">Totaal</string>
+    <string name="shop_bulk_sell_confirm">Alles verkopen</string>
+    <string name="shop_xp_boost_activated">2× XP boost geactiveerd voor %1$d uur!</string>
+    <string name="shop_not_enough_in_inventory">Niet genoeg in inventaris</string>
+    <string name="shop_bought_item">%1$d× %2$s gekocht</string>
+    <string name="shop_sold_item">%1$d× %2$s verkocht voor %3$d munten</string>
+    <string name="quest_complete_notification">Quest voltooid: %1$s!</string>
+    <string name="quest_complete_with_rewards">Quest voltooid: %1$s! Geclaimd: %2$s</string>
+    <string name="quest_daily_complete_coins">Dagelijkse quest voltooid! +%1$s munten</string>
+    <string name="quest_daily_complete_dwarven">Dagelijkse quest voltooid! Je hebt dwerguitrusting gevonden!</string>
+    <string name="quest_weekly_complete">Wekelijkse uitdaging voltooid! +%1$s munten</string>
+    <string name="quest_weekly_bonus_complete_coins">Alle wekelijkse uitdagingen voltooid! +%1$s munten</string>
+    <string name="quest_weekly_bonus_complete_divine">Alle wekelijkse uitdagingen voltooid! Je hebt goddelijke uitrusting gevonden!</string>
+    <string name="guild_contributed_items">%1$d items bijgedragen.</string>
+    <string name="mercantile_not_enough_coins">Niet genoeg munten (nodig %1$s munten).</string>
+    <string name="mercantile_route_start_failed">Route starten mislukt: %1$s</string>
+    <string name="mercantile_added_to_queue">Toegevoegd aan wachtrij: Handelsvaardig — %1$s.</string>
+    <string name="inventory_requires_to_equip">Vereist %1$s om uit te rusten.</string>
+    <string name="home_found_pet">Je hebt een huisdier gevonden: %1$s!</string>
+    <string name="home_congratulations_received">Gefeliciteerd! Je hebt ontvangen: %1$s</string>
+    <string name="combat_no_food_title">Geen voedsel uitgerust</string>
+    <string name="combat_no_food_body">Je hebt geen voedsel uitgerust. Zonder voedsel kun je snel sterven en de meeste beloningen verliezen. Toch starten?</string>
+    <string name="combat_start_anyway">Toch starten</string>
+    <string name="combat_xp_consolation">XP (troostprijs)</string>
+    <string name="bestiary_loot_item_header">Voorwerp</string>
+    <string name="worker_no_mats">Geen mat.</string>
+
+    <!-- Boss Descriptions -->
+    <string name="boss_king_black_dragon_desc">De legendarische driekoppige draak, gevreesd in het hele rijk.</string>
+    <string name="boss_demon_lord_desc">Een oeroude demon uit de afgrond, meester van duistere magie.</string>
+    <string name="boss_kraken_desc">De schrik van de diepzee, een kolossaal zeemonster.</string>
+    <string name="boss_balrog_desc">Een oeroude demon van vlam en schaduw, ontwaakt uit zijn sluimer diep onder de aarde.</string>
+    <string name="boss_void_sovereign_desc">De oorspronkelijke entiteit achter de leemtescheuren. Onmetelijk oud, bekijkt sterfelijke uitdagers met minachting.</string>
 </resources>

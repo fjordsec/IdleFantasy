@@ -36,6 +36,7 @@
     <string name="btn_enter_dungeon">Zindana Gir</string>
     <string name="btn_enter_arena">Arenaya Gir</string>
     <string name="btn_activate">Etkinleştir</string>
+    <string name="btn_extend">Uzat</string>
     <string name="btn_deactivate">Devre Dışı Bırak</string>
     <string name="btn_close">Kapat</string>
     <string name="btn_back">Geri</string>
@@ -516,6 +517,10 @@
     <string name="crafting_needed_have">%1$d (sende olan %2$d)</string>
     <!-- Translator note: %1$d = quantity in inventory -->
     <string name="crafting_in_inventory">Envanterde: ×%1$d</string>
+    <string name="crafting_quest_targets">Görev hedefleri</string>
+    <string name="quest_fill_daily">Günlük</string>
+    <string name="quest_fill_weekly">Haftalık</string>
+    <string name="quest_fill_guild">Lonca</string>
 
     <!-- ===== FarmingScreen ===== -->
     <!-- Translator note: %1$s = crop name -->
@@ -602,8 +607,10 @@
     <string name="achievement_combat_50_desc">Reach combat level 50</string>
     <string name="achievement_combat_75_name">Elite</string>
     <string name="achievement_combat_75_desc">Reach combat level 75</string>
-    <string name="achievement_combat_99_name">Max Combat</string>
+    <string name="achievement_combat_99_name">Champion</string>
     <string name="achievement_combat_99_desc">Reach combat level 99</string>
+    <string name="achievement_combat_113_name">Max Combat</string>
+    <string name="achievement_combat_113_desc">Reach the maximum combat level of 113</string>
     <string name="achievement_quest_1_name">Quester</string>
     <string name="achievement_quest_1_desc">Complete 1 quest</string>
     <string name="achievement_quest_5_name">Dedicated</string>
@@ -688,7 +695,7 @@
     <string name="worker_apprentice">Apprentice</string>
     <string name="worker_journeyman">Journeyman</string>
     <string name="worker_master">Master</string>
-    <string name="inn_long_laborer_desc">8h gathering, 0.5x efficiency. No crafting, prayer, or runecrafting cap. Queue up as much as you like. He\'s slow, but he\'ll do anything.</string>
+    <string name="inn_long_laborer_desc">One job per hire, dismissed after collecting. 8h gathering, 0.5x efficiency, unlimited crafting qty. He\'s slow, but he\'ll do anything.</string>
     <string name="inn_apprentice_desc">8h gathering, 1x efficiency. Crafting, prayer, and runecrafting capped at 480 items per session.</string>
     <string name="inn_journeyman_desc">6h gathering, 1.25x efficiency. Crafting, prayer, and runecrafting capped at 360 items per session.</string>
     <string name="inn_master_desc">4h gathering, 2x efficiency. Crafting, prayer, and runecrafting capped at 240 items per session.</string>
@@ -857,7 +864,7 @@
     <string name="settings_backup_failed">Backup failed.</string>
     <string name="settings_backup_folder_set">Backup folder set.</string>
     <string name="home_town_title">Town</string>
-    <string name="home_town_desc">Dükkanı, hanı, loncayı, kiliseyi, usta atölyesini, avcı ustasını ve oyun köşesini ziyaret edin</string>
+    <string name="home_town_desc">Dükkanı, hanı, loncayı, kiliseyi, usta atölyesini, avcı ustasını ve panayırı ziyaret edin</string>
     <string name="guild_dailies_available">Dailies available</string>
     <string name="guild_do_dailies_hint">Do dailies to increase your reputation</string>
     <string name="guild_name_thieving">Hirsizlar Loncasi</string>
@@ -1140,4 +1147,149 @@
     <string name="item_amulet_of_the_void_name">Boşluk Muskası</string>
     <string name="item_amulet_of_the_void_desc">Saf boşluk özünden yapılmış bir kolye. Taşıyanın tüm savaş istatistiklerini artırır.</string>
 
+
+    <!-- ===== Carnival ===== -->
+    <string name="carnival_title">Panayır</string>
+    <string name="carnival_desc">Oyunlar, ödüller ve şenlik!</string>
+    <string name="carnival_ticket_balance">Biletler: %1$d</string>
+    <string name="carnival_idle_tab">Pasif Oyunlar</string>
+    <string name="carnival_active_tab">Aktif Oyunlar</string>
+    <string name="carnival_shop_tab">Ödül Dükkanı</string>
+    <string name="carnival_idle_hint">Bilet kazanmak için sıraya bir seans ekleyin. Daha yüksek beceri seviyesi daha fazla bilet demektir.</string>
+    <string name="carnival_archery_range">Okçuluk Sahası</string>
+    <string name="carnival_idle_desc_archery">Hareketli hedefleri vurun. Menzil seviyesi getiriyi artırır.</string>
+    <string name="carnival_strongman_competition">Güçlü Adam Yarışması</string>
+    <string name="carnival_idle_desc_strongman">Taşları kaldırın ve çekiçleri sallayın. Güç seviyesi getiriyi artırır.</string>
+    <string name="carnival_wizards_duel">Büyücü Düellosu</string>
+    <string name="carnival_idle_desc_wizard">Rakip büyücülere karşı illüzyon büyüleri yapın. Büyü seviyesi getiriyi artırır.</string>
+    <string name="carnival_fishing_derby">Balık Avı Yarışması</string>
+    <string name="carnival_idle_desc_fishing">Panayır havuzunda en büyük balığı yakalayın. Balık avı seviyesi getiriyi artırır.</string>
+    <string name="carnival_skill_level">%1$s Sv.%2$d</string>
+    <string name="carnival_ticket_yield">~%1$d bilet/seans</string>
+    <string name="carnival_queue">Sıraya Ekle</string>
+    <string name="carnival_ring_toss">Halka Fırlatma</string>
+    <string name="carnival_active_ring_desc">Gösterge altın hedef bölgesine ulaştığında fırlatın.</string>
+    <string name="carnival_ring_target_hint">Merkezi hedefleyin (45%%–55%%)</string>
+    <string name="carnival_throw">Fırlat!</string>
+    <string name="carnival_hammer_strike">Çekiç Darbesi</string>
+    <string name="carnival_active_hammer_desc">Güç göstergesi en yüksek seviyedeyken vurun.</string>
+    <string name="carnival_power_label">Güç Göstergesi</string>
+    <string name="carnival_hammer_miss_zone">Iskaladı</string>
+    <string name="carnival_hammer_good_zone">İyi</string>
+    <string name="carnival_hammer_perfect_zone">Mükemmel!</string>
+    <string name="carnival_strike">Vur!</string>
+    <string name="carnival_potion_sequence">İksir Dizisi</string>
+    <string name="carnival_active_sequence_desc">İksir renklerine dikkat edin ve aynı sırayla tekrarlayın.</string>
+    <string name="carnival_sequence_watch">Sırayı izleyin…</string>
+    <string name="carnival_sequence_input">Renk %1$d / %2$d\'ye dokunun</string>
+    <string name="carnival_item_appraisal">Eşya Değerlendirmesi</string>
+    <string name="carnival_active_appraisal_desc">Hangi eşya açık pazarda daha değerlidir?</string>
+    <string name="carnival_appraisal_which">Hangisi daha değerli?</string>
+    <string name="carnival_play">Oyna</string>
+    <string name="carnival_cooldown">%1$ds %2$dd içinde hazır</string>
+    <string name="carnival_ticket_cost">%1$d bilet</string>
+    <string name="carnival_redeem">Kullan</string>
+    <string name="carnival_queue_added">Sıraya eklendi: %1$s.</string>
+    <string name="carnival_queue_full">Sıra dolu (3/3).</string>
+    <string name="carnival_ring_won">On ikiden! +%1$d bilet</string>
+    <string name="carnival_ring_missed">Hedef ıskalandı!</string>
+    <string name="carnival_hammer_perfect">Mükemmel darbe! +%1$d bilet</string>
+    <string name="carnival_hammer_good">İyi darbe! +%1$d bilet</string>
+    <string name="carnival_hammer_miss">Iskalandı!</string>
+    <string name="carnival_sequence_correct">Sıra doğru! +%1$d bilet</string>
+    <string name="carnival_sequence_wrong">Yanlış sıra! Tekrar deneyin.</string>
+    <string name="carnival_appraisal_correct">Doğru! +%1$d bilet</string>
+    <string name="carnival_appraisal_wrong">Yanlış! Daha değerli eşya %1$s idi.</string>
+    <string name="carnival_redeemed">Kullanıldı: %1$s!</string>
+    <string name="carnival_not_enough_tickets">Yeterli bilet yok.</string>
+    <string name="carnival_lamp_redeemed">+%1$d XP %2$s\'de!</string>
+
+    <!-- ===== Magic Bean / Farming ===== -->
+    <string name="farming_bean_note_1">Küçük bir filiz toprağı deldi.</string>
+    <string name="farming_bean_note_2">Sap doğaüstü bir hızla büyüyor.</string>
+    <string name="farming_bean_note_3">Yapraklar devasa — daha önce hiç böyle bir şey görmediniz.</string>
+    <string name="farming_bean_note_4">Bulutlar üst sapın etrafında toplanmaya başladı...</string>
+    <string name="farming_bean_note_5">Yukarıdan garip sesler geliyor.</string>
+    <string name="farming_bean_note_6">Uzak bir gümbürtü. Yükseklerde bir şeyler kıpırdıyor.</string>
+    <string name="farming_bean_note_7">Fasulye sapı sarsılıyor. Zirvede bir şeyler bekliyor.</string>
+    <string name="farming_bean_note_8">Neredeyse orada. Hava seyreleşiyor. Zirveyi neredeyse görebilirsiniz.</string>
+    <string name="farming_bean_ready">Fasulye sapı bulutların ötesine uzanıyor. Tırmanmaya hazır mısınız?</string>
+    <string name="farming_bean_climb">Tırman</string>
+    <string name="farming_bean_climbed">Fasulye sapına tırmandınız. Bir şeyler sizi bekliyor...</string>
+    <string name="farming_bean_picker_stats">\?\?\?  •  \?\?\?  •  \?\?\?</string>
+    <string name="farming_magic_bean_one_plot">Sihirli fasulyeler yalnızca bir tarlaya ekilebilir</string>
+
+    <!-- ===== Armory Tab ===== -->
+    <string name="armory_tab">Cephane</string>
+    <string name="tab_bonuses">Bonuslar</string>
+    <string name="bonus_none">Aktif XP bonusu yok</string>
+    <string name="bonus_all_skills">Tüm beceriler</string>
+    <string name="bonus_section_boosts">Aktif bonuslar</string>
+    <string name="bonus_section_skills">Skill Bonuses</string>
+    <string name="bonus_combat_stat_boost">Boosts combat stats</string>
+    <string name="snackbar_added_to_queue">Sıraya eklendi: %1$s.</string>
+    <string name="snackbar_queue_full">Sıra dolu (3/3).</string>
+    <string name="home_not_enough_coins_repeat">%1$s tekrarlamak için yeterli altın yok.</string>
+    <string name="home_not_enough_materials_repeat">%1$s tekrarlamak için yeterli malzeme yok.</string>
+    <string name="combat_start_failed">Başlatılamadı: %1$s</string>
+    <string name="combat_select_spell">Select a spell before entering.</string>
+    <string name="combat_spell_level_required">Need Magic %1$d for %2$s.</string>
+    <string name="guild_daily_reward_claimed">Daily reward claimed!</string>
+    <string name="armory_not_owned">Bu eşyaya sahip değilsiniz.</string>
+    <string name="armory_how_to_obtain">Nasıl edinilir</string>
+    <string name="armory_no_stats">İstatistik bonusu yok.</string>
+    <string name="armory_filter_all">Tümü</string>
+    <string name="armory_filter_weapons">Silahlar</string>
+    <string name="armory_filter_armor">Zırh</string>
+    <string name="armory_filter_accessories">Aksesuarlar</string>
+    <string name="armory_filter_tools">Aletler</string>
+
+    <!-- Session / queue messages (issue #596) -->
+    <string name="skill_no_logs">Envanterde kütük yok</string>
+    <string name="skill_not_enough_rune_essence">Yeterli Rün Özü yok</string>
+    <string name="skill_not_enough_item">Yeterli %1$s yok</string>
+    <string name="skill_not_enough_materials">Yeterli malzeme yok</string>
+    <string name="skill_session_start_failed">Oturum başlatılamadı: %1$s</string>
+    <string name="skill_added_to_queue_activity">Sıraya eklendi: %1$s — %2$s.</string>
+    <string name="worker_already_busy">İşçi zaten meşgul.</string>
+    <string name="worker_not_enough_logs">Yeterli kütük yok.</string>
+    <string name="worker_not_enough_rune_essence">Yeterli Rün Özü yok.</string>
+    <string name="worker_not_enough_materials">Yeterli malzeme yok.</string>
+    <string name="shop_no_junk">Satılacak ıvır zıvır yok</string>
+    <string name="shop_sold_junk">Ivır zıvır %1$s altına satıldı</string>
+    <string name="shop_no_old_equipment">Satılacak eski ekipman yok</string>
+    <string name="shop_sold_old_equipment">Eski ekipman %1$s altına satıldı</string>
+    <string name="shop_bulk_sell_total">Toplam</string>
+    <string name="shop_bulk_sell_confirm">Hepsini sat</string>
+    <string name="shop_xp_boost_activated">2× XP bonusu %1$d saat için aktifleştirildi!</string>
+    <string name="shop_not_enough_in_inventory">Envanterde yeterli değil</string>
+    <string name="shop_bought_item">%1$d× %2$s satın alındı</string>
+    <string name="shop_sold_item">%1$d× %2$s, %3$d altına satıldı</string>
+    <string name="quest_complete_notification">Görev tamamlandı: %1$s!</string>
+    <string name="quest_complete_with_rewards">Görev tamamlandı: %1$s! Alındı: %2$s</string>
+    <string name="quest_daily_complete_coins">Günlük görev tamamlandı! +%1$s altın</string>
+    <string name="quest_daily_complete_dwarven">Günlük görev tamamlandı! Cüce ekipmanı buldunuz!</string>
+    <string name="quest_weekly_complete">Haftalık görev tamamlandı! +%1$s altın</string>
+    <string name="quest_weekly_bonus_complete_coins">Tüm haftalık görevler tamamlandı! +%1$s altın</string>
+    <string name="quest_weekly_bonus_complete_divine">Tüm haftalık görevler tamamlandı! İlahi ekipman buldunuz!</string>
+    <string name="guild_contributed_items">%1$d eşya katkıda bulunuldu.</string>
+    <string name="mercantile_not_enough_coins">Yeterli altın yok (%1$s altın gerekli).</string>
+    <string name="mercantile_route_start_failed">Rota başlatılamadı: %1$s</string>
+    <string name="mercantile_added_to_queue">Sıraya eklendi: Ticaret — %1$s.</string>
+    <string name="inventory_requires_to_equip">Ekipman için %1$s gerekli.</string>
+    <string name="home_found_pet">Bir evcil hayvan buldunuz: %1$s!</string>
+    <string name="home_congratulations_received">Tebrikler! Aldığınız: %1$s</string>
+    <string name="combat_no_food_title">Yiyecek Takılı Değil</string>
+    <string name="combat_no_food_body">Yiyecek takılı değil. Yiyecek olmadan çabuk ölebilir ve ödüllerin çoğunu kaybedebilirsiniz. Yine de başlansın mı?</string>
+    <string name="combat_start_anyway">Yine de başla</string>
+    <string name="combat_xp_consolation">XP (teselli)</string>
+    <string name="bestiary_loot_item_header">Eşya</string>
+    <string name="worker_no_mats">Mat. yok</string>
+
+    <!-- Boss Descriptions -->
+    <string name="boss_king_black_dragon_desc">Tüm diyarda korkulan efsanevi üç başlı ejderha.</string>
+    <string name="boss_demon_lord_desc">Karanlık büyünün ustası, uçurumdan gelen kadim bir iblis.</string>
+    <string name="boss_kraken_desc">Derin denizlerin dehşeti, devasa bir deniz canavarı.</string>
+    <string name="boss_balrog_desc">Yerin derinliklerindeki uykusundan uyanan, alev ve gölgeden kadim bir iblis.</string>
+    <string name="boss_void_sovereign_desc">Hiçlik yarıklarının arkasındaki ilkel varlık. Ölçülemeyecek kadar yaşlı, ölümlü meydan okuyanlara küçümsemeyle bakar.</string>
 </resources>

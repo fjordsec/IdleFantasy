@@ -106,6 +106,15 @@ data class PlayerFlags(
     @SerialName("last_fertilizer_key") val lastFertilizerKey: String? = null,
     /** Lifetime kill count per enemy/boss key; absent = never encountered. */
     @SerialName("enemy_kills") val enemyKills: Map<String, Int> = emptyMap(),
+    /** True once the magic bean has been planted; permanently hides it from the seed picker and stops the farming drop from occurring again. */
+    @SerialName("magic_bean_planted") val magicBeanPlanted: Boolean = false,
+    /** Epoch ms when each carnival active game cooldown expires; 0 = not on cooldown. */
+    @SerialName("carnival_ring_toss_cooldown_at") val carnivalRingTossCooldownAt: Long = 0L,
+    @SerialName("carnival_hammer_strike_cooldown_at") val carnivalHammerStrikeCooldownAt: Long = 0L,
+    @SerialName("carnival_potion_sequence_cooldown_at") val carnivalPotionSequenceCooldownAt: Long = 0L,
+    @SerialName("carnival_item_appraisal_cooldown_at") val carnivalItemAppraisalCooldownAt: Long = 0L,
+    /** All equipment item keys ever obtained; used by the Armory to show items even after they are sold. */
+    @SerialName("seen_item_keys") val seenItemKeys: Set<String> = emptySet(),
 )
 
 /** A single entry in the recent sessions log. */

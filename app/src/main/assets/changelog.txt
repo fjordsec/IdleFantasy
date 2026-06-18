@@ -1,3 +1,57 @@
+v1.9.5
+• Replaced the collapsible Town menu on the home screen with an always-visible grid: four equal-width buttons (Shop, Inn, Guild Hall, Church) on the top row, three centre-aligned buttons (Builder, Slayer, Carnival) on the bottom row.
+• Fix boss fights always counting as magic combat for guild quests — combat style is now tracked correctly so attack/strength bosses credit Warriors Guild and magic bosses credit Mages Guild
+• Fix Combat screen tab text misalignment when the Combat Log tab appears during an active session
+• Fix ranged and magic weapons showing incorrect (melee) attack and strength bonuses in the combat stats display
+• Fix kills made before dying in a dungeon now counting toward your active Slayer Master task
+• Fix inventory "Coins" appearing as a sellable item in the Shop
+
+v1.9.4
+• Fix "Repeat Session" on boss sessions always repeating as Melee style regardless of equipped weapon; now reads the stored active weapon slot (or falls back to equipped weapon) for correct combat style detection.
+• Fix XP breakdown in boss and dungeon session results showing incorrect "Blessing bonus" amounts; total XP now correctly factors in both the 2x boost and active blessing multiplier.
+• Fix skill cape XP bonus percentage in the Bonuses tab displaying as negative (e.g. -90% instead of +10%); the bonus fraction is now applied correctly.
+• Restructure the Bonuses tab to show per-skill combined XP bonuses; skill cape, pet, and prestige bonuses are now grouped by skill with the total multiplier and individual sources shown per skill.
+• Extract user-facing notification and snackbar strings into localisable string resources across ViewModels and screen files, with translations in all 8 supported languages.
+• When opening a recipe in the crafting screen, a "Quest targets" row now appears showing chips for any active quests, daily quests, weekly challenges, or guild dailies that require that item; tapping a chip sets the craft quantity to exactly the remaining amount needed.
+• Fix Mercantile trade route balance: Grand Exchange was always a net loss on average at level 99 and is now profitable; all routes have doubled per-minute spread so session outcomes are genuinely variable rather than practically fixed each run.
+• Fix "Equip Best Gear" to use weighted stat scoring: weapons prioritise attack bonus (hit chance) over strength and defence, while armour and jewellery prioritise defence over offensive stats.
+• Italian translation update by community contributor Stark-Night: remaining untranslated strings now localised, improved natural wording throughout, and several minor typos corrected.
+• "Sell Junk" and "Sell Old Gear" now show a confirmation sheet listing every item that would be sold with its quantity and coin value before anything is removed from inventory.
+• The Armory now remembers every item you have ever obtained; selling or consuming an item no longer removes it from your armory collection count.
+v1.9.3
+• Fix Magic Bean only appearing in the "Harvest and Plant All" crop picker; it now appears when planting a single plot too. When using "Plant All", the Magic Bean is planted in one plot and a message clarifies it can only grow in one plot at a time.
+• Fix weekly boss quests not progressing when a boss session is collected from the Home screen instead of the Combat screen.
+• Add a Bonuses tab to the Profile screen showing all active XP bonuses in one place: time-limited boosts (XP Boost, blessings), equipped skill cape, owned pets, and prestige bonuses. Only non-zero active bonuses are shown; an empty state message appears when there are none.
+v1.9.2
+• Fix Inn worker description to clarify that workers are hired for one job and dismissed after that session is collected
+• Fix weekly farming quest (Season's Harvest) showing no progress when harvesting crops with fertilizer applied
+• Fix skill detail view on Profile page showing only one item per level; all items unlocked at the same level now appear
+• Fix queued combat and boss fights getting the full food supply restored when chained via Repeat Action
+• Fix expedition and carnival sessions showing a false XP projection in the action queue
+• Fix construction materials (carved stone, etc.) being sold by Sell Junk
+
+v1.9.1
+• Fix: Carnival active game cooldowns now persist when you leave and return to the Carnival screen
+• Fix: Carnival tickets are no longer sold by the "Sell Junk" button
+• Fix: Guild daily combat progress earned from sessions collected after the 6am reset is no longer silently lost
+• Fix: Recent activity log now shows collected sessions in newest-first order
+• Fix: Dutch (nl) translation updated with 54 missing strings for Slayer and other features
+• Fix: French (fr) translation updated: 203 missing item names (weapons, armour, spells, capes, pets, boss descriptions) now display in French instead of English
+
+v1.9.0
+• New: Carnival added to town; queue idle minigames (Archery Range, Strongman Competition, Wizard's Duel, Fishing Derby) to earn carnival tickets, or play active games (Ring Toss, Hammer Strike, Potion Sequence, Item Appraisal) directly; spend tickets in the Prize Shop for exclusive stat gear (Trickster's Amulet, Strongman's Sigil, Carnival Cape) and the Juggling Imp pet
+• New: Magic Bean, a rare farming drop -- plant it and see what happens
+• Fix: Ranged weapons now correctly contribute their accuracy to hit chance (bows were contributing 0, causing very low hit rates)
+• New: Armory tab in Profile -- browse every piece of equipment, see stats for owned items and how to obtain items you are missing, including drop chance for enemy/boss drops
+• New: Bestiary and Armory now show a progress bar (X / Y encountered/obtained, %)
+• Redesign: Bestiary and Armory detail sheets now use proper stat tables and a 3-column drop table (Item / Qty / Chance); drop chances shown as percentages
+
+v1.8.13
+• Fix: Workers (Apprentice, Journeyman, Master) could queue more Firemaking logs than their craft limit; UI now also caps the quantity selector to the worker's limit
+• New: Max Combat (level 113) achievement added as the true combat cap; level 99 achievement renamed to Champion
+• Fix: Combat style and spell selection not remembered between dungeons; weapon slot and spell choices are now persisted and pre-selected when reopening the dungeon dialog
+• Fix: Ranged combat damage too low; bows now provide a ranged strength bonus scaled to their tier, making ranged damage comparable to melee at equivalent levels
+
 v1.8.12
 • Fix: Worker efficiency not applying to crafting skills — Journeyman and Master workers now produce more items per session than Apprentice, matching how efficiency already worked for gathering
 • New: Thieves Guild now appears in the Guild Hall

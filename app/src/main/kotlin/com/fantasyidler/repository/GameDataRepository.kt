@@ -314,12 +314,14 @@ class GameDataRepository @Inject constructor(
             smithingRecipes.forEach { (k, r) -> add(k); addAll(r.materials.keys) }
             fletchingRecipes.forEach { (k, r) -> add(k); addAll(r.materials.keys) }
             craftingRecipes.forEach { (k, r) -> add(k); addAll(r.materials.keys) }
+            constructionRecipes.forEach { (k, r) -> add(k); addAll(r.materials.keys) }
             addAll(ores.keys)
             addAll(gems.keys)
             addAll(logs.keys)
             addAll(bones.keys)
             add("coins")
             add("rune_essence")
+            add("carnival_ticket")
             addAll(runes.keys)
             // Quest collect targets should not be auto-sold
             quests.values.filter { it.type == "collect" }.forEach { add(it.target) }

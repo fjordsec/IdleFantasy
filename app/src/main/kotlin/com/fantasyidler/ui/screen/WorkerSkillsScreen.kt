@@ -297,6 +297,7 @@ fun WorkerSkillsScreen(
                     sessionDurationMs = state.sessionDurationMs,
                     onStart           = { logKey, qty -> viewModel.startFiremakingSession(logKey, qty) },
                     context           = context,
+                    craftLimit        = state.maxCraftQty,
                 )
                 is SheetState.Runecrafting -> RunecraftingSheet(
                     sheet             = sheet,
@@ -678,7 +679,7 @@ private fun WorkerCraftRecipeRow(
                     )
                 }
                 else -> Text(
-                    text  = "No mats",
+                    text  = stringResource(R.string.worker_no_mats),
                     style = MaterialTheme.typography.labelSmall,
                     color = dim,
                 )
